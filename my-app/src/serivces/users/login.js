@@ -8,7 +8,7 @@ const login = async (email, password) => {
     );
     return userCredential.user;
   } catch (error) {
-    throw new Error(error.message);
+    alert(error.message);
   }
 };
 

@@ -12,16 +12,16 @@ function MainNav() {
             className={({isActive}) => (isActive ? classes.active : undefined)}
             end
           >
-            Начало
+            Login
           </NavLink>
         </li>
         <li>
           <NavLink
-            to="/addClient"
+            to="/register"
             className={({isActive}) => (isActive ? classes.active : undefined)}
             end
           >
-            Добави Клиент
+            Register
           </NavLink>
         </li>
         <li>

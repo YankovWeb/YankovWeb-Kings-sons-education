@@ -47,7 +47,7 @@ export default function Login() {
   const handleSubmit = (event) => {
     event.preventDefault();
   };
-
+  console.log(email, password);
   return (
     <ThemeProvider theme={theme}>
       <Grid container component="main" sx={{height: "100vh"}}>

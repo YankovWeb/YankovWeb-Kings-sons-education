@@ -1,5 +1,5 @@
 import {useState} from "react";
-import {register} from "./your-code-file";
+import register from "../serivces/users/register";
 
 const useRegistration = () => {
   const [email, setEmail] = useState("");

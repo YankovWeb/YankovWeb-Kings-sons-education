@@ -5,7 +5,7 @@ const register = async (email, password) => {
   try {
     await createUserWithEmailAndPassword(auth, email, password);
   } catch (error) {
-    alert(error);
+    alert(error.message);
   }
 };
 

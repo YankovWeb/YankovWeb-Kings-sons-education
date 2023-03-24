@@ -33,7 +33,7 @@ function Copyright(props) {
 
 const theme = createTheme();
 
-export default function Rgiegister() {
+export default function Register() {
   const handleSubmit = (event) => {
     event.preventDefault();
     const data = new FormData(event.currentTarget);

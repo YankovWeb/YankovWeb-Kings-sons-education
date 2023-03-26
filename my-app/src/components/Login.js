@@ -11,7 +11,14 @@ import Grid from "@mui/material/Grid";
 import LockOutlinedIcon from "@mui/icons-material/LockOutlined";
 import Typography from "@mui/material/Typography";
 import {createTheme, ThemeProvider} from "@mui/material/styles";
+import {useNavigate} from "react-router-dom";
 import {useState} from "react";
+import {useUserAuth} from "../context/AuthContext";
+
+//get from contest useSignIn
+//get from context Auth
+//if auth not render the this
+//use signIn from context
 
 function Copyright(props) {
   return (
@@ -36,18 +43,36 @@ const theme = createTheme();
 export default function Login() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const [error, setError] = useState("");
+  const {logIn} = useUserAuth();
+  const navigate = useNavigate();
 
-  const onChangeEmailHandler = (e) => {
-    setEmail(e.target.value);
-  };
-  const onChangePasswordHandler = (e) => {
-    setPassword(e.target.value);
+  const handleEmailChange = (event) => {
+    setEmail(event.target.value);
   };
 
-  const handleSubmit = (event) => {
-    event.preventDefault();
+  const handlePasswordChange = (event) => {
+    setPassword(event.target.value);
   };
-  console.log(email, password);
+  const onSubmit = async (e) => {
+    e.preventDefault();
+    setError("");
+    try {
+      await logIn(email, password);
+      navigate("/home");
+    } catch (err) {
+      setError(err.message);
+    }
+  };
+
+  if (error) {
+    return (
+      <div>
+        <p>Error: {error.message}</p>
+      </div>
+    );
+  }
+
   return (
     <ThemeProvider theme={theme}>
       <Grid container component="main" sx={{height: "100vh"}}>
@@ -84,12 +109,7 @@ export default function Login() {
             <Typography component="h1" variant="h5">
               Sign in
             </Typography>
-            <Box
-              component="form"
-              noValidate
-              onSubmit={handleSubmit}
-              sx={{mt: 1}}
-            >
+            <Box component="form" noValidate onSubmit={onSubmit} sx={{mt: 1}}>
               <TextField
                 margin="normal"
                 required
@@ -99,7 +119,7 @@ export default function Login() {
                 name="email"
                 autoComplete="email"
                 autoFocus
-                onChange={onChangeEmailHandler}
+                onChange={handleEmailChange}
                 value={email}
               />
               <TextField
@@ -111,7 +131,7 @@ export default function Login() {
                 type="password"
                 id="password"
                 autoComplete="current-password"
-                onChange={onChangePasswordHandler}
+                onChange={handlePasswordChange}
                 value={password}
               />
               <FormControlLabel

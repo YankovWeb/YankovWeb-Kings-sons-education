@@ -1,4 +1,3 @@
-import * as React from "react";
 import Avatar from "@mui/material/Avatar";
 import Button from "@mui/material/Button";
 import CssBaseline from "@mui/material/CssBaseline";
@@ -12,7 +11,10 @@ import LockOutlinedIcon from "@mui/icons-material/LockOutlined";
 import Typography from "@mui/material/Typography";
 import Container from "@mui/material/Container";
 import {createTheme, ThemeProvider} from "@mui/material/styles";
-import useRegistration from "../hooks/useRegister";
+import {useUserAuth} from "../context/AuthContext";
+import {useNavigate} from "react-router-dom";
+import React, {useState} from "react";
+
 function Copyright(props) {
   return (
     <Typography
@@ -34,16 +36,30 @@ function Copyright(props) {
 const theme = createTheme();
 
 export default function Register() {
-  const {
-    email,
-    password,
-    isLoading,
-    error,
-    isRegistered,
-    handleEmailChange,
-    handlePasswordChange,
-    handleSubmit,
-  } = useRegistration();
+  const [email, setEmail] = useState("");
+  const [error, setError] = useState("");
+  const [password, setPassword] = useState("");
+  const {signUp} = useUserAuth();
+  let navigate = useNavigate();
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    setError("");
+    try {
+      await signUp(email, password);
+      navigate("/home");
+    } catch (err) {
+      setError(err.message);
+      alert(error);
+    }
+  };
+
+  const onEmailCHangeHandler = (e) => {
+    setEmail(e.target.value);
+  };
+  const onPasswordCHangeHandler = (e) => {
+    setPassword(e.target.value);
+  };
 
   return (
     <ThemeProvider theme={theme}>
@@ -73,7 +89,7 @@ export default function Register() {
                   label="Email Address"
                   name="email"
                   autoComplete="email"
-                  onChange={handleEmailChange}
+                  onChange={onEmailCHangeHandler}
                   value={email}
                 />
               </Grid>
@@ -86,7 +102,7 @@ export default function Register() {
                   type="password"
                   id="password"
                   autoComplete="new-password"
-                  onChange={handlePasswordChange}
+                  onChange={onPasswordCHangeHandler}
                   value={password}
                 />
               </Grid>

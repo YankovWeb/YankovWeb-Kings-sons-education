@@ -1,29 +1,50 @@
 import {NavLink} from "react-router-dom";
 
 import classes from "./MainNav.module.css";
-
+import {useUserAuth} from "../context/AuthContext";
+import {useNavigate} from "react-router";
 function MainNav() {
+  const navigate = useNavigate();
+  const {logOut, user} = useUserAuth();
+  const handleLogout = async () => {
+    try {
+      await logOut();
+      navigate("/home");
+    } catch (error) {
+      console.log(error.message);
+    }
+  };
   return (
     <nav className={classes.header}>
       <ul className={classes.list}>
-        <li>
-          <NavLink
-            to="/login"
-            className={({isActive}) => (isActive ? classes.active : undefined)}
-            end
-          >
-            Login
-          </NavLink>
-        </li>
-        <li>
-          <NavLink
-            to="/register"
-            className={({isActive}) => (isActive ? classes.active : undefined)}
-            end
-          >
-            Register
-          </NavLink>
-        </li>
+        {!user && (
+          <>
+            <li>
+              <NavLink
+                to="/login"
+                className={({isActive}) =>
+                  isActive ? classes.active : undefined
+                }
+                end
+              >
+                Login
+              </NavLink>
+            </li>
+
+            <li>
+              <NavLink
+                to="/register"
+                className={({isActive}) =>
+                  isActive ? classes.active : undefined
+                }
+                end
+              >
+                Register
+              </NavLink>
+            </li>
+          </>
+        )}
+
         <li>
           <NavLink
             to="/client"
@@ -50,10 +71,11 @@ function MainNav() {
         </li>
         <li>
           <NavLink
-            to="/products"
+            to="/"
             className={({isActive}) => (isActive ? classes.active : undefined)}
+            onClick={handleLogout}
           >
-            Продукти
+            Logout
           </NavLink>
         </li>
       </ul>

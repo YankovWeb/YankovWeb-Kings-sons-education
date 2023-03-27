@@ -21,7 +21,7 @@ const router = createBrowserRouter([
         element: <Rgiegister />,
       },
       {
-        path: "/home",
+        path: "/catalog",
         element: <Home />,
       },
     ],

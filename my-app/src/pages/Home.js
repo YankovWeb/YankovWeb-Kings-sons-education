@@ -15,6 +15,7 @@ import Container from "@mui/material/Container";
 import Link from "@mui/material/Link";
 import {createTheme, ThemeProvider} from "@mui/material/styles";
 import {useUserAuth} from "../context/AuthContext";
+import CustomizedRating from "../components/Rating/Rating";
 
 function Copyright() {
   return (
@@ -112,8 +113,10 @@ const Home = () => {
                       </Typography>
                     </CardContent>
                     <CardActions>
+                      {true && <CustomizedRating />}
+
                       <Button size="small">View</Button>
-                      <Button size="small">Edit</Button>
+                      {true && <Button size="small">Edit</Button>}
                     </CardActions>
                   </Card>
                 </Grid>

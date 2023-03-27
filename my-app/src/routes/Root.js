@@ -7,9 +7,8 @@ const Root = () => {
   return (
     <div style={{display: "contents"}}>
       <MainNav />
-      <main>
-        <Outlet />
-      </main>
+
+      <Outlet />
     </div>
   );
 };

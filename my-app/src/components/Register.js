@@ -48,6 +48,8 @@ export default function Register() {
     try {
       await signUp(email, password);
       navigate("/home");
+      setEmail("");
+      setPassword("");
     } catch (err) {
       setError(err.message);
       alert(error);

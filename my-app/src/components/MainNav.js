@@ -1,5 +1,4 @@
 import {NavLink} from "react-router-dom";
-
 import classes from "./MainNav.module.css";
 import {useUserAuth} from "../context/AuthContext";
 import {useNavigate} from "react-router";
@@ -69,15 +68,19 @@ function MainNav() {
             Стартирай Кампания
           </NavLink>
         </li>
-        <li>
-          <NavLink
-            to="/"
-            className={({isActive}) => (isActive ? classes.active : undefined)}
-            onClick={handleLogout}
-          >
-            Logout
-          </NavLink>
-        </li>
+        {user && (
+          <li>
+            <NavLink
+              to="/"
+              className={({isActive}) =>
+                isActive ? classes.active : undefined
+              }
+              onClick={handleLogout}
+            >
+              Logout
+            </NavLink>
+          </li>
+        )}
       </ul>
     </nav>
   );

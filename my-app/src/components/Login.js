@@ -1,4 +1,5 @@
 import Avatar from "@mui/material/Avatar";
+
 import Button from "@mui/material/Button";
 import CssBaseline from "@mui/material/CssBaseline";
 import TextField from "@mui/material/TextField";
@@ -13,6 +14,8 @@ import Typography from "@mui/material/Typography";
 import {createTheme, ThemeProvider} from "@mui/material/styles";
 import {useNavigate} from "react-router-dom";
 import {useState} from "react";
+import AlertLogInRegister from "../components/AlertLogInRegister";
+
 import {useUserAuth} from "../context/AuthContext";
 
 //get from contest useSignIn
@@ -54,28 +57,26 @@ export default function Login() {
   const handlePasswordChange = (event) => {
     setPassword(event.target.value);
   };
+
+  const onCloseErrorHandler = () => {
+    setError(false);
+  };
+
   const onSubmit = async (e) => {
     e.preventDefault();
-    setError("");
+
     try {
       await logIn(email, password);
+      setError("succes");
       navigate("/home");
     } catch (err) {
       setError(err.message);
     }
   };
 
-  if (error) {
-    return (
-      <div>
-        <p>Error: {error.message}</p>
-      </div>
-    );
-  }
-
   return (
     <ThemeProvider theme={theme}>
-      <Grid container component="main" sx={{height: "100vh"}}>
+      <Grid container component="main" sx={{height: "93.6vh"}}>
         <CssBaseline />
         <Grid
           item
@@ -110,6 +111,10 @@ export default function Login() {
               Sign in
             </Typography>
             <Box component="form" noValidate onSubmit={onSubmit} sx={{mt: 1}}>
+              <AlertLogInRegister
+                onCloseErrorHandler={onCloseErrorHandler}
+                error={error}
+              />
               <TextField
                 margin="normal"
                 required

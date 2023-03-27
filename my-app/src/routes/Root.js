@@ -5,12 +5,12 @@ const Root = () => {
   //   const navigiation = useNavigation();
 
   return (
-    <>
+    <div style={{display: "contents"}}>
       <MainNav />
       <main>
         <Outlet />
       </main>
-    </>
+    </div>
   );
 };
 

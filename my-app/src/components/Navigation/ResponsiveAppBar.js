@@ -85,7 +85,24 @@ const ResponsiveAppBar = () => {
               sx={{
                 display: {xs: "block", md: "none"},
               }}
-            ></Menu>
+            >
+              {" "}
+              {!user
+                ? pages.map((page) => (
+                    <MenuItem key={page} onClick={handleCloseNavMenu}>
+                      <NavLink to={`/${page}`} style={{textDecoration: "none"}}>
+                        <Typography textAlign="center">{page}</Typography>
+                      </NavLink>
+                    </MenuItem>
+                  ))
+                : pagesLogIn.map((page) => (
+                    <MenuItem key={page} onClick={handleCloseNavMenu}>
+                      <NavLink to={`/${page}`} style={{textDecoration: "none"}}>
+                        <Typography textAlign="center">{page}</Typography>
+                      </NavLink>
+                    </MenuItem>
+                  ))}
+            </Menu>
           </Box>
           <AdbIcon sx={{display: {xs: "flex", md: "none"}, mr: 1}} />
           <Typography

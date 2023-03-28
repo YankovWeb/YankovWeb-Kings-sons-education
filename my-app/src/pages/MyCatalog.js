@@ -6,7 +6,7 @@ const Catalog = () => {
   const {user} = useUserAuth();
   const cards = [1, 2, 3, 4, 5, 6, 7, 8, 9];
   //fetch user items for user
-  console.log(user.uid);
+
   //check if is owner
   const owner = true;
 

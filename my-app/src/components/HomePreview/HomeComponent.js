@@ -1,4 +1,6 @@
 import {useEffect, useState} from "react";
+import {useFireStoreUser} from "../../context/UserContext";
+
 import {styled} from "@mui/material/styles";
 import Box from "@mui/material/Box";
 import Typography from "@mui/material/Typography";
@@ -39,6 +41,9 @@ const Subtitle = styled(Typography)({
 
 const HomeComponent = () => {
   const [isSubtitleVisible, setIsSubtitleVisible] = useState(false);
+  const {getUserData} = useFireStoreUser();
+
+  const curetUser = getUserData();
 
   useEffect(() => {
     // Set the `isSubtitleVisible` state to true after a delay
@@ -51,11 +56,13 @@ const HomeComponent = () => {
       clearTimeout(timeoutId);
     };
   }, []);
-
+  console.log(curetUser);
   return (
     <>
       <Header>
-        <Title>Welcome to our Educational School</Title>
+        <Title>
+          Welcome to our Educational School {curetUser[0]?.userName}
+        </Title>
       </Header>
       <Content>
         <Subtitle className={isSubtitleVisible ? "fade-in" : ""}>

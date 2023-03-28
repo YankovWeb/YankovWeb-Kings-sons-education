@@ -8,17 +8,17 @@ import {
   deleteDoc,
 } from "firebase/firestore";
 import {db} from "../config/firebase";
-
+import {useUserAuth} from "../context/AuthContext";
 const FirestoreContext = createContext();
 
 export const FirestoreContextUsersProvider = ({children}) => {
   const [data, setData] = useState([]);
 
+  const {user} = useUserAuth();
   const colectionName = "users";
-  console.log(data);
 
-  const getUserData = (userId) => {
-    return data.filter((user) => user.id === userId);
+  const getUserData = () => {
+    return data.filter((userInData) => userInData.id === user?.uid);
   };
 
   const addData = async (newData) => {
@@ -26,7 +26,7 @@ export const FirestoreContextUsersProvider = ({children}) => {
       const docRef = await addDoc(collection(db, colectionName), newData);
       setData([...data, {id: docRef.id, ...newData}]);
     } catch (error) {
-      console.error("Error adding document: ", error);
+      throw new Error("Error adding document: ", error);
     }
   };
 
@@ -38,7 +38,7 @@ export const FirestoreContextUsersProvider = ({children}) => {
       );
       setData(updatedArray);
     } catch (error) {
-      console.error("Error updating document: ", error);
+      throw new Error("Error updating document: ", error);
     }
   };
 
@@ -48,7 +48,7 @@ export const FirestoreContextUsersProvider = ({children}) => {
       const filteredArray = data.filter((item) => item.id !== id);
       setData(filteredArray);
     } catch (error) {
-      console.error("Error deleting document: ", error);
+      throw new Error("Error deleting document: ", error);
     }
   };
 
@@ -71,6 +71,7 @@ export const FirestoreContextUsersProvider = ({children}) => {
     <FirestoreContext.Provider
       value={{
         data,
+
         getUserData,
         addData,
         updateData,

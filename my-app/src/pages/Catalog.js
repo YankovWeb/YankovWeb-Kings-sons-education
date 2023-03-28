@@ -5,9 +5,9 @@ import ItemsView from "../components/Catalog/ItemsView";
 const Catalog = () => {
   const cards = [1, 2, 3, 4, 5, 6, 7, 8, 9];
   const {user} = useUserAuth();
-  const auth = false;
+  const owner = false;
 
-  return <ItemsView cards={cards} user={user} auth={auth} />;
+  return <ItemsView cards={cards} user={user} owner={owner} />;
 };
 
 export default Catalog;

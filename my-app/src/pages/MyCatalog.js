@@ -7,7 +7,7 @@ const Catalog = () => {
   //fetch user items for user
   const {user} = useUserAuth();
   //check if is owner
-  const owner = false;
+  const owner = true;
 
   return <ItemsView cards={cards} user={user} owner={owner} />;
 };

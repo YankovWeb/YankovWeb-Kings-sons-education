@@ -94,10 +94,10 @@ const ItemsView = ({cards, user, owner}) => {
                     </Typography>
                   </CardContent>
                   <CardActions>
-                    {user && <CustomizedRating />}
+                    {true && <CustomizedRating />}
 
                     <Button size="small">View</Button>
-                    {user && owner && <Button size="small">Edit</Button>}
+                    {false && <Button size="small">Edit</Button>}
                   </CardActions>
                 </Card>
               </Grid>

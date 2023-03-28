@@ -21,7 +21,7 @@ const RatingAtom = ({value, onChangeHandler}) => {
         "& > legend": {mt: 2},
       }}
     >
-      <Typography component="legend">Favorite</Typography>
+      <Typography component="legend">Rating</Typography>
       <StyledRating
         value={+value}
         name="customized-color"

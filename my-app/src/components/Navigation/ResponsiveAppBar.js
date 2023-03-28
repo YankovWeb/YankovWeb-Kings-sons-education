@@ -110,6 +110,7 @@ const ResponsiveAppBar = () => {
             {!user
               ? pages.map((page) => (
                   <NavLink
+                    style={{textDecoration: "none"}}
                     to={`/${page}`}
                     className={({isActive}) =>
                       isActive ? classes.active : undefined
@@ -127,6 +128,7 @@ const ResponsiveAppBar = () => {
               : pagesLogIn.map((page) => (
                   <NavLink
                     to={`${page}`}
+                    style={{textDecoration: "none"}}
                     className={({isActive}) =>
                       isActive ? classes.active : undefined
                     }
@@ -168,7 +170,12 @@ const ResponsiveAppBar = () => {
                 {" "}
                 {settings.map((setting) => (
                   <MenuItem key={setting} onClick={handleCloseUserMenu}>
-                    <Typography textAlign="center">{setting}</Typography>
+                    <NavLink
+                      to={`/${setting}`}
+                      style={{textDecoration: "none"}}
+                    >
+                      <Typography textAlign="center">{setting}</Typography>
+                    </NavLink>
                   </MenuItem>
                 ))}
                 <MenuItem

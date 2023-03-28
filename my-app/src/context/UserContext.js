@@ -13,8 +13,14 @@ const FirestoreContext = createContext();
 
 export const FirestoreContextUsersProvider = ({children}) => {
   const [data, setData] = useState([]);
+
   const colectionName = "users";
   console.log(data);
+
+  const getUserData = (userId) => {
+    return data.filter((user) => user.id === userId);
+  };
+
   const addData = async (newData) => {
     try {
       const docRef = await addDoc(collection(db, colectionName), newData);
@@ -65,6 +71,7 @@ export const FirestoreContextUsersProvider = ({children}) => {
     <FirestoreContext.Provider
       value={{
         data,
+        getUserData,
         addData,
         updateData,
         deleteData,

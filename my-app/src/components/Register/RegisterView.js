@@ -22,6 +22,7 @@ const RegisterView = () => {
   const [email, setEmail] = useState("");
   const [error, setError] = useState("");
   const [password, setPassword] = useState("");
+  const [userName, setuserName] = useState("");
   const {signUp} = useUserAuth();
   const {addData} = useFireStoreUser();
   let navigate = useNavigate();
@@ -33,6 +34,7 @@ const RegisterView = () => {
       const response = await signUp(email, password);
 
       const obj = {
+        userName: userName,
         email: response.user.email,
         creatAt: response.user.metadata.creationTime,
         lastSignIn: response.user.metadata.lastSignInTime,
@@ -50,6 +52,9 @@ const RegisterView = () => {
   };
   const onPasswordCHangeHandler = (e) => {
     setPassword(e.target.value);
+  };
+  const onUserNameCHangeHandler = (e) => {
+    setuserName(e.target.value);
   };
   const onCloseErrorHandler = () => {
     setError(false);
@@ -80,6 +85,18 @@ const RegisterView = () => {
         )}
         <Box component="form" noValidate onSubmit={handleSubmit} sx={{mt: 3}}>
           <Grid container spacing={2}>
+            <Grid item xs={12}>
+              <TextField
+                required
+                fullWidth
+                id="userName"
+                label="User Name"
+                name="UserName"
+                autoComplete="UserName"
+                onChange={onUserNameCHangeHandler}
+                value={userName}
+              />
+            </Grid>
             <Grid item xs={12}>
               <TextField
                 required

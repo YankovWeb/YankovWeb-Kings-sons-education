@@ -19,7 +19,7 @@ import {useNavigate} from "react-router";
 import {NavLink} from "react-router-dom";
 
 const ResponsiveAppBar = () => {
-  const pages = ["Login", "register", "home", "catalog"];
+  const pages = ["home", "login", "register", "catalog"];
   const pagesLogIn = ["home", "catalog", "my catalog", "create class"];
   const settings = ["Profile", "Dashboard"];
 
@@ -120,9 +120,7 @@ const ResponsiveAppBar = () => {
               color: "inherit",
               textDecoration: "none",
             }}
-          >
-            LOGO
-          </Typography>
+          ></Typography>
           <Box sx={{flexGrow: 1, display: {xs: "none", md: "flex"}}}>
             {!user
               ? pages.map((page) => (

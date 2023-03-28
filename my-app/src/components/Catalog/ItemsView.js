@@ -10,7 +10,7 @@ import Stack from "@mui/material/Stack";
 import Box from "@mui/material/Box";
 import Typography from "@mui/material/Typography";
 import Container from "@mui/material/Container";
-
+import {Avatar} from "@mui/material";
 import CustomizedRating from "../Rating/Rating";
 import Copyright from "../../Atoms/CoppyRigth";
 import CatalogButton from "../../Atoms/CatalogButton";
@@ -23,7 +23,6 @@ const ItemsView = ({cards, user, owner}) => {
       <CssBaseline />
       <AppBar position="relative"></AppBar>
       <main>
-        {/* Hero unit */}
         <Box
           sx={{
             bgcolor: "background.paper",
@@ -73,6 +72,11 @@ const ItemsView = ({cards, user, owner}) => {
                     flexDirection: "column",
                   }}
                 >
+                  <Typography variant="h6" component="h6">
+                    {card}
+                  </Typography>
+                  <Avatar alt="Remy Sharp" src="/static/images/avatar/1.jpg" />
+
                   <CardMedia
                     component="img"
                     sx={{
@@ -95,7 +99,7 @@ const ItemsView = ({cards, user, owner}) => {
                     {user && <CustomizedRating />}
 
                     <Button size="small">View</Button>
-                    {user === card.user && <Button size="small">Edit</Button>}
+                    {user && <Button size="small">Edit</Button>}
                   </CardActions>
                 </Card>
               </Grid>

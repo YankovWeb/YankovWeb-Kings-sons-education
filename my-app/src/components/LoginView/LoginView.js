@@ -11,7 +11,7 @@ import Grid from "@mui/material/Grid";
 import LockOutlinedIcon from "@mui/icons-material/LockOutlined";
 import Typography from "@mui/material/Typography";
 
-import {useNavigate} from "react-router-dom";
+import {useNavigate, NavLink} from "react-router-dom";
 import {useState} from "react";
 import AlertLogInRegister from "../Alert/AlertLogInRegister";
 
@@ -133,10 +133,14 @@ const LoginView = () => {
                   Forgot password?
                 </Link>
               </Grid>
+
               <Grid item>
-                <Link href="/register" variant="body2">
+                <NavLink
+                  to="/register"
+                  style={{textDecoration: "none", color: "blue"}}
+                >
                   {"Don't have an account? Sign Up"}
-                </Link>
+                </NavLink>
               </Grid>
             </Grid>
             <Copyright sx={{mt: 5}} />

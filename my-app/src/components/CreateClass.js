@@ -1,6 +1,5 @@
 import {useState} from "react";
 import {TextField, Button, styled, Typography, Container} from "@mui/material";
-import {auth} from "../config/firebase";
 
 const StyledForm = styled("form")({
   display: "flex",
@@ -42,7 +41,7 @@ const CreateClass = () => {
     ownerId: "",
   });
   const userId = 123;
-  const handleSubmit = (event) => {
+  const handleSubmit = async (event) => {
     event.preventDefault();
     setValues((prev) => ({...prev, ownerId: userId}));
     console.log(values);

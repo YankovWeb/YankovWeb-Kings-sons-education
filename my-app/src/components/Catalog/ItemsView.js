@@ -15,7 +15,7 @@ import CustomizedRating from "../Rating/Rating";
 import Copyright from "../../Atoms/CoppyRigth";
 import CatalogButton from "../../Atoms/CatalogButton";
 
-const ItemsView = ({cards, user, owner}) => {
+const ItemsView = ({cards, user, curetUser}) => {
   //
   return (
     <div>

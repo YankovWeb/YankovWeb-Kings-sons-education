@@ -17,7 +17,7 @@ import CustomizedRating from "../Rating/Rating";
 
 import Copyright from "../../Atoms/CoppyRigth";
 
-const ItemsView = ({cards, user, auth}) => {
+const ItemsView = ({cards, user, owner}) => {
   return (
     <div>
       {" "}
@@ -97,7 +97,7 @@ const ItemsView = ({cards, user, auth}) => {
                     {user && <CustomizedRating />}
 
                     <Button size="small">View</Button>
-                    {user && auth && <Button size="small">Edit</Button>}
+                    {user && owner && <Button size="small">Edit</Button>}
                   </CardActions>
                 </Card>
               </Grid>

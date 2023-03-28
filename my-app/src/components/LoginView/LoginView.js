@@ -16,6 +16,7 @@ import {useState} from "react";
 import AlertLogInRegister from "../Alert/AlertLogInRegister";
 
 import {useUserAuth} from "../../context/AuthContext";
+
 import Copyright from "../../Atoms/CoppyRigth";
 //get from contest useSignIn
 //get from context Auth
@@ -27,6 +28,7 @@ const LoginView = () => {
   const [password, setPassword] = useState("");
   const [error, setError] = useState("");
   const {logIn} = useUserAuth();
+
   const navigate = useNavigate();
 
   const handleEmailChange = (event) => {

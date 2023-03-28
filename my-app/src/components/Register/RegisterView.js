@@ -14,6 +14,7 @@ import Container from "@mui/material/Container";
 import {NavLink, useNavigate} from "react-router-dom";
 import {useState} from "react";
 import {useUserAuth} from "../../context/AuthContext";
+import {useFireStoreUser} from "../../context/UserContext";
 import AlertLogInRegister from "../Alert/AlertLogInRegister";
 import Copyright from "../../Atoms/CoppyRigth";
 
@@ -22,13 +23,22 @@ const RegisterView = () => {
   const [error, setError] = useState("");
   const [password, setPassword] = useState("");
   const {signUp} = useUserAuth();
+  const {addData} = useFireStoreUser();
   let navigate = useNavigate();
 
   const handleSubmit = async (e) => {
     e.preventDefault();
     setError("");
     try {
-      await signUp(email, password);
+      const response = await signUp(email, password);
+
+      const obj = {
+        email: response.user.email,
+        creatAt: response.user.metadata.creationTime,
+        lastSignIn: response.user.metadata.lastSignInTime,
+        id: response.user.uid,
+      };
+      await addData(obj);
       navigate("/home");
     } catch (err) {
       setError(err.code);

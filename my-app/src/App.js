@@ -7,6 +7,7 @@ import Catalog from "./pages/Catalog";
 import MyCatalog from "./pages/MyCatalog";
 import Create from "./pages/Create";
 import {UserAuthContextProvider} from "./context/AuthContext";
+import {FirestoreContextUsersProvider} from "./context/UserContext";
 import Home from "./pages/Home";
 
 const router = createBrowserRouter([
@@ -47,7 +48,9 @@ const router = createBrowserRouter([
 const App = () => {
   return (
     <UserAuthContextProvider>
-      <RouterProvider router={router} />
+      <FirestoreContextUsersProvider>
+        <RouterProvider router={router} />{" "}
+      </FirestoreContextUsersProvider>
     </UserAuthContextProvider>
   );
 };

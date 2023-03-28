@@ -1,9 +1,9 @@
 import React from "react";
 import {RouterProvider, createBrowserRouter} from "react-router-dom";
 import LoginPage from "./pages/LoginPage";
-import Rgiegister from "./pages/Register";
+import Register from "./pages/Register";
 import Root from "./routes/Root";
-import ProtectedRoute from "./routes/ProtectedRoute";
+import Catalog from "./pages/Catalog";
 import {UserAuthContextProvider} from "./context/AuthContext";
 import Home from "./pages/Home";
 
@@ -18,11 +18,15 @@ const router = createBrowserRouter([
       },
       {
         path: "/register",
-        element: <Rgiegister />,
+        element: <Register />,
+      },
+      {
+        path: "/home",
+        element: <Home />,
       },
       {
         path: "/catalog",
-        element: <Home />,
+        element: <Catalog />,
       },
     ],
 

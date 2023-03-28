@@ -1,15 +1,15 @@
 import React from "react";
 import {Outlet} from "react-router-dom";
-import MainNav from "../components/MainNav";
+import ResponsiveAppBar from "../components/ResponsiveAppBar";
 const Root = () => {
   //   const navigiation = useNavigation();
 
   return (
-    <div style={{display: "contents"}}>
-      <MainNav />
+    <>
+      <ResponsiveAppBar />
 
       <Outlet />
-    </div>
+    </>
   );
 };
 

@@ -1,5 +1,5 @@
 import {useState} from "react";
-import classes from "./MainNav.module.css";
+import classes from "./ResponsiveAppBar.module.css";
 import AppBar from "@mui/material/AppBar";
 import Box from "@mui/material/Box";
 import Toolbar from "@mui/material/Toolbar";
@@ -18,8 +18,8 @@ import {useUserAuth} from "../context/AuthContext";
 import {useNavigate} from "react-router";
 import {NavLink} from "react-router-dom";
 
-function ResponsiveAppBar() {
-  const pages = ["Login", "register", "home"];
+const ResponsiveAppBar = () => {
+  const pages = ["Login", "register", "home", "catalog"];
   const pagesLogIn = ["home", "catalog", "myCatalog"];
   const settings = ["Profile", "Dashboard"];
 
@@ -186,5 +186,5 @@ function ResponsiveAppBar() {
       </Container>
     </AppBar>
   );
-}
+};
 export default ResponsiveAppBar;

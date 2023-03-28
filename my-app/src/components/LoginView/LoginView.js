@@ -13,34 +13,16 @@ import Typography from "@mui/material/Typography";
 
 import {useNavigate} from "react-router-dom";
 import {useState} from "react";
-import AlertLogInRegister from "./Alert/AlertLogInRegister";
+import AlertLogInRegister from "../Alert/AlertLogInRegister";
 
-import {useUserAuth} from "../context/AuthContext";
-
+import {useUserAuth} from "../../context/AuthContext";
+import Copyright from "../../Atoms/CoppyRigth";
 //get from contest useSignIn
 //get from context Auth
 //if auth not render the this
 //use signIn from context
 
-function Copyright(props) {
-  return (
-    <Typography
-      variant="body2"
-      color="text.secondary"
-      align="center"
-      {...props}
-    >
-      {"Copyright © "}
-      <Link color="inherit" href="https://mui.com/">
-        Your Website
-      </Link>{" "}
-      {new Date().getFullYear()}
-      {"."}
-    </Typography>
-  );
-}
-
-export default function Login() {
+const LoginView = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [error, setError] = useState("");
@@ -163,4 +145,5 @@ export default function Login() {
       </Grid>
     </Grid>
   );
-}
+};
+export default LoginView;

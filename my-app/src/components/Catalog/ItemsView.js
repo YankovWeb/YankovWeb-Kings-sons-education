@@ -1,6 +1,5 @@
 import AppBar from "@mui/material/AppBar";
 import Button from "@mui/material/Button";
-
 import Card from "@mui/material/Card";
 import CardActions from "@mui/material/CardActions";
 import CardContent from "@mui/material/CardContent";
@@ -9,16 +8,15 @@ import CssBaseline from "@mui/material/CssBaseline";
 import Grid from "@mui/material/Grid";
 import Stack from "@mui/material/Stack";
 import Box from "@mui/material/Box";
-
 import Typography from "@mui/material/Typography";
 import Container from "@mui/material/Container";
 
 import CustomizedRating from "../Rating/Rating";
-
 import Copyright from "../../Atoms/CoppyRigth";
 import CatalogButton from "../../Atoms/CatalogButton";
 
 const ItemsView = ({cards, user, owner}) => {
+  //
   return (
     <div>
       {" "}
@@ -94,10 +92,10 @@ const ItemsView = ({cards, user, owner}) => {
                     </Typography>
                   </CardContent>
                   <CardActions>
-                    {true && <CustomizedRating />}
+                    {user && <CustomizedRating />}
 
                     <Button size="small">View</Button>
-                    {false && <Button size="small">Edit</Button>}
+                    {user === card.user && <Button size="small">Edit</Button>}
                   </CardActions>
                 </Card>
               </Grid>

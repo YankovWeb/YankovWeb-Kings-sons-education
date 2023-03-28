@@ -1,4 +1,4 @@
-import React from "react";
+import {useEffect, useState} from "react";
 import {styled} from "@mui/material/styles";
 import Box from "@mui/material/Box";
 import Typography from "@mui/material/Typography";
@@ -38,13 +38,13 @@ const Subtitle = styled(Typography)({
 });
 
 const HomeComponent = () => {
-  const [isSubtitleVisible, setIsSubtitleVisible] = React.useState(false);
+  const [isSubtitleVisible, setIsSubtitleVisible] = useState(false);
 
-  React.useEffect(() => {
+  useEffect(() => {
     // Set the `isSubtitleVisible` state to true after a delay
     const timeoutId = setTimeout(() => {
       setIsSubtitleVisible(true);
-    }, 1000);
+    }, 500);
 
     // Clear the timeout if the component unmounts or the `isSubtitleVisible` state is set to true
     return () => {

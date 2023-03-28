@@ -8,7 +8,6 @@ const AlertLogInRegister = ({error, onCloseErrorHandler}) => {
           variant="outlined"
           onClose={onCloseErrorHandler}
           severity="error"
-          close
         >
           {error}
         </Alert>

@@ -14,7 +14,7 @@ import {createTheme, ThemeProvider} from "@mui/material/styles";
 import {useUserAuth} from "../context/AuthContext";
 import {useNavigate} from "react-router-dom";
 import React, {useState} from "react";
-
+import AlertLogInRegister from "../components/Alert/AlertLogInRegister";
 function Copyright(props) {
   return (
     <Typography
@@ -48,11 +48,8 @@ export default function Register() {
     try {
       await signUp(email, password);
       navigate("/home");
-      setEmail("");
-      setPassword("");
     } catch (err) {
-      setError(err.message);
-      alert(error);
+      setError(err.code);
     }
   };
 
@@ -61,6 +58,9 @@ export default function Register() {
   };
   const onPasswordCHangeHandler = (e) => {
     setPassword(e.target.value);
+  };
+  const onCloseErrorHandler = () => {
+    setError(false);
   };
 
   return (
@@ -81,6 +81,12 @@ export default function Register() {
           <Typography component="h1" variant="h5">
             Sign up
           </Typography>
+          {error && (
+            <AlertLogInRegister
+              onCloseErrorHandler={onCloseErrorHandler}
+              error={error}
+            />
+          )}
           <Box component="form" noValidate onSubmit={handleSubmit} sx={{mt: 3}}>
             <Grid container spacing={2}>
               <Grid item xs={12}>

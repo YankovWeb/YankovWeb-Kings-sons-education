@@ -1,7 +1,7 @@
 import React from "react";
 import {RouterProvider, createBrowserRouter} from "react-router-dom";
 import LoginPage from "./pages/LoginPage";
-import Rgiegister from "./components/Register";
+import Rgiegister from "./pages/Register";
 import Root from "./routes/Root";
 import ProtectedRoute from "./routes/ProtectedRoute";
 import {UserAuthContextProvider} from "./context/AuthContext";

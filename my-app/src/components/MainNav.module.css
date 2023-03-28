@@ -36,7 +36,8 @@
 }
 
 .active {
-  background-color: #34495e;
+  background-color: hsl(210, 88%, 41%);
   border-radius: 5px;
   box-shadow: 0px 0px 10px #333;
+  text-decoration: none;
 }

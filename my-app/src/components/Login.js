@@ -14,7 +14,7 @@ import Typography from "@mui/material/Typography";
 import {createTheme, ThemeProvider} from "@mui/material/styles";
 import {useNavigate} from "react-router-dom";
 import {useState} from "react";
-import AlertLogInRegister from "../components/AlertLogInRegister";
+import AlertLogInRegister from "./Alert/AlertLogInRegister";
 
 import {useUserAuth} from "../context/AuthContext";
 

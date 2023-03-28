@@ -86,7 +86,8 @@ function MainNav() {
   );
 }
 export default MainNav;*/
-import * as React from "react";
+import {useState} from "react";
+import classes from "./MainNav.module.css";
 import AppBar from "@mui/material/AppBar";
 import Box from "@mui/material/Box";
 import Toolbar from "@mui/material/Toolbar";
@@ -105,21 +106,22 @@ import {useUserAuth} from "../context/AuthContext";
 import {useNavigate} from "react-router";
 import {NavLink} from "react-router-dom";
 
-const pages = ["Login", "register", "home"];
-const pagesLogIn = ["home", "catalog", "myCatalog"];
-const settings = ["Profile", "Dashboard"];
-
 function ResponsiveAppBar() {
-  const [anchorElNav, setAnchorElNav] = React.useState(null);
-  const [anchorElUser, setAnchorElUser] = React.useState(null);
+  const pages = ["Login", "register", "home"];
+  const pagesLogIn = ["home", "catalog", "myCatalog"];
+  const settings = ["Profile", "Dashboard"];
+
+  const [anchorElNav, setAnchorElNav] = useState(null);
+  const [anchorElUser, setAnchorElUser] = useState(null);
   const navigate = useNavigate();
   const {logOut, user} = useUserAuth();
+
   const handleLogout = async () => {
     try {
       await logOut();
       navigate("/home");
     } catch (error) {
-      console.log(error.message);
+      alert(error.message);
     }
   };
   const handleOpenNavMenu = (event) => {
@@ -142,23 +144,6 @@ function ResponsiveAppBar() {
       <Container maxWidth="xl">
         <Toolbar disableGutters>
           <AdbIcon sx={{display: {xs: "none", md: "flex"}, mr: 1}} />
-          <Typography
-            variant="h6"
-            noWrap
-            component="a"
-            href="/"
-            sx={{
-              mr: 2,
-              display: {xs: "none", md: "flex"},
-              fontFamily: "monospace",
-              fontWeight: 700,
-              letterSpacing: ".3rem",
-              color: "inherit",
-              textDecoration: "none",
-            }}
-          >
-            LOGO
-          </Typography>
 
           <Box sx={{flexGrow: 1, display: {xs: "flex", md: "none"}}}>
             <IconButton
@@ -212,7 +197,12 @@ function ResponsiveAppBar() {
           <Box sx={{flexGrow: 1, display: {xs: "none", md: "flex"}}}>
             {!user
               ? pages.map((page) => (
-                  <NavLink to={`${page}`}>
+                  <NavLink
+                    to={`/${page}`}
+                    className={({isActive}) =>
+                      isActive ? classes.active : undefined
+                    }
+                  >
                     <Button
                       key={page}
                       onClick={handleCloseNavMenu}
@@ -223,7 +213,12 @@ function ResponsiveAppBar() {
                   </NavLink>
                 ))
               : pagesLogIn.map((page) => (
-                  <NavLink to={`${page}`}>
+                  <NavLink
+                    to={`${page}`}
+                    className={({isActive}) =>
+                      isActive ? classes.active : undefined
+                    }
+                  >
                     <Button
                       key={page}
                       onClick={handleCloseNavMenu}

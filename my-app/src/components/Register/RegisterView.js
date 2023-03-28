@@ -13,14 +13,15 @@ import Container from "@mui/material/Container";
 
 import {useNavigate} from "react-router-dom";
 import {useState} from "react";
+import {useUserAuth} from "../../context/AuthContext";
 import AlertLogInRegister from "../Alert/AlertLogInRegister";
 import Copyright from "../../Atoms/CoppyRigth";
 
-const RegisterView = ({signUp}) => {
+const RegisterView = () => {
   const [email, setEmail] = useState("");
   const [error, setError] = useState("");
   const [password, setPassword] = useState("");
-
+  const {signUp} = useUserAuth();
   let navigate = useNavigate();
 
   const handleSubmit = async (e) => {

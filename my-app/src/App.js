@@ -4,6 +4,7 @@ import LoginPage from "./pages/LoginPage";
 import Register from "./pages/Register";
 import Root from "./routes/Root";
 import Catalog from "./pages/Catalog";
+import MyCatalog from "./pages/MyCatalog";
 import {UserAuthContextProvider} from "./context/AuthContext";
 import Home from "./pages/Home";
 
@@ -27,6 +28,14 @@ const router = createBrowserRouter([
       {
         path: "/catalog",
         element: <Catalog />,
+      },
+      {
+        path: "/my catalog",
+        element: <MyCatalog />,
+      },
+      {
+        path: "/create class",
+        element: <MyCatalog />,
       },
     ],
 

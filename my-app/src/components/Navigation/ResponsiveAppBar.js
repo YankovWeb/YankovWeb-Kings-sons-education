@@ -14,13 +14,13 @@ import Tooltip from "@mui/material/Tooltip";
 import MenuItem from "@mui/material/MenuItem";
 import AdbIcon from "@mui/icons-material/Adb";
 
-import {useUserAuth} from "../context/AuthContext";
+import {useUserAuth} from "../../context/AuthContext";
 import {useNavigate} from "react-router";
 import {NavLink} from "react-router-dom";
 
 const ResponsiveAppBar = () => {
   const pages = ["Login", "register", "home", "catalog"];
-  const pagesLogIn = ["home", "catalog", "myCatalog"];
+  const pagesLogIn = ["home", "catalog", "my catalog", "create class"];
   const settings = ["Profile", "Dashboard"];
 
   const [anchorElNav, setAnchorElNav] = useState(null);

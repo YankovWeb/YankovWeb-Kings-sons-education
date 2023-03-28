@@ -16,6 +16,7 @@ import Container from "@mui/material/Container";
 import CustomizedRating from "../Rating/Rating";
 
 import Copyright from "../../Atoms/CoppyRigth";
+import CatalogButton from "../../Atoms/CatalogButton";
 
 const ItemsView = ({cards, user, owner}) => {
   return (
@@ -58,8 +59,7 @@ const ItemsView = ({cards, user, owner}) => {
               spacing={2}
               justifyContent="center"
             >
-              <Button variant="contained">Main call to action</Button>
-              <Button variant="outlined">Secondary action</Button>
+              <CatalogButton user={user} />
             </Stack>
           </Container>
         </Box>

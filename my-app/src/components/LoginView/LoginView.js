@@ -12,46 +12,37 @@ import LockOutlinedIcon from "@mui/icons-material/LockOutlined";
 import Typography from "@mui/material/Typography";
 
 import {useNavigate, NavLink} from "react-router-dom";
-import {useState} from "react";
+
 import AlertLogInRegister from "../Alert/AlertLogInRegister";
 
 import {useUserAuth} from "../../context/AuthContext";
-
+import useFormData from "../../hooks/useFormData";
 import Copyright from "../../Atoms/CoppyRigth";
+import useShowAlert from "../../hooks/useShowAlert";
 //get from context useSignIn
 //get from context Auth
 //if auth not render the this
 //use signIn from context
 
 const LoginView = () => {
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
-  const [showModal, setShowModal] = useState(false);
+  const [formData, handleFormChange] = useFormData();
+  const [showModal, setShowModal, onCloseErrorHandler] = useShowAlert();
   const {logInUser, error, errorMessage} = useUserAuth();
 
   const navigate = useNavigate();
 
-  const handleEmailChange = (event) => {
-    setEmail(event.target.value);
-  };
-
-  const handlePasswordChange = (event) => {
-    setPassword(event.target.value);
-  };
-
-  const onCloseErrorHandler = () => {
-    setShowModal(false);
-  };
-
   const onSubmit = async (e) => {
-    debugger;
     e.preventDefault();
+    try {
+      await logInUser(formData);
 
-    await logInUser(email, password);
-
-    setShowModal(error);
+      navigate("/profile");
+    } catch (erro) {
+      setShowModal(true);
+    }
   };
 
+  console.log(error, showModal);
   return (
     <Grid container component="main" sx={{height: "93.6vh"}}>
       <CssBaseline />
@@ -103,8 +94,8 @@ const LoginView = () => {
               name="email"
               autoComplete="email"
               autoFocus
-              onChange={handleEmailChange}
-              value={email}
+              onChange={handleFormChange}
+              value={formData.email}
             />
             <TextField
               margin="normal"
@@ -115,8 +106,8 @@ const LoginView = () => {
               type="password"
               id="password"
               autoComplete="current-password"
-              onChange={handlePasswordChange}
-              value={password}
+              onChange={handleFormChange}
+              value={formData.password}
             />
 
             <Button

@@ -23,7 +23,7 @@ const RegisterView = () => {
   const [error, setError] = useState("");
   const [password, setPassword] = useState("");
   const [userName, setuserName] = useState("");
-  const {signUp} = useUserAuth();
+  const {signUpUser} = useUserAuth();
   const {addData} = useFireStoreUser();
   let navigate = useNavigate();
 
@@ -31,7 +31,7 @@ const RegisterView = () => {
     e.preventDefault();
     setError("");
     try {
-      const response = await signUp(email, password);
+      const response = await signUpUser(email, password);
 
       const obj = {
         userName: userName,

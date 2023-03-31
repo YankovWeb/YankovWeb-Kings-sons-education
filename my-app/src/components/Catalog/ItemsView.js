@@ -14,9 +14,19 @@ import {Avatar} from "@mui/material";
 import CustomizedRating from "../Rating/Rating";
 import Copyright from "../../Atoms/CoppyRigth";
 import CatalogButton from "../../Atoms/CatalogButton";
+import {useUserAuth} from "../../context/AuthContext";
+import {useFireStoreUser} from "../../context/UserContext";
+import {NavLink} from "react-router-dom";
+const ItemsView = ({cards}) => {
+  const {user} = useUserAuth();
+  const {getUserData} = useFireStoreUser();
+  const owner = getUserData()[0];
 
-const ItemsView = ({cards, user, curetUser}) => {
-  //
+  //fix the inline css to a styled componnent.
+  //important!  bring the bissnes logic here.
+  //fix re rendering of avata becouse context calls
+
+  console.log(owner);
   return (
     <div>
       {" "}
@@ -98,8 +108,12 @@ const ItemsView = ({cards, user, curetUser}) => {
                   <CardActions>
                     {user && <CustomizedRating />}
 
-                    <Button size="small">View</Button>
-                    {user && <Button size="small">Edit</Button>}
+                    <Button size="small">
+                      {" "}
+                      <NavLink to={"/view"}>View</NavLink>
+                    </Button>
+
+                    {owner && <Button size="small">Edit</Button>}
                   </CardActions>
                 </Card>
               </Grid>

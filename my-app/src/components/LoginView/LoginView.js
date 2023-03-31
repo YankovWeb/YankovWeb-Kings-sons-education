@@ -26,8 +26,8 @@ import Copyright from "../../Atoms/CoppyRigth";
 const LoginView = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-  const [error, setError] = useState("");
-  const {logIn} = useUserAuth();
+  const [showModal, setShowModal] = useState(false);
+  const {logInUser, error} = useUserAuth();
 
   const navigate = useNavigate();
 
@@ -40,18 +40,18 @@ const LoginView = () => {
   };
 
   const onCloseErrorHandler = () => {
-    setError(false);
+    setShowModal(false);
   };
 
   const onSubmit = async (e) => {
     e.preventDefault();
 
     try {
-      await logIn(email, password);
-      setError("succes");
+      await logInUser(email, password);
+
       navigate("/home");
     } catch (err) {
-      setError(err.message);
+      setShowModal(true);
     }
   };
 
@@ -95,6 +95,7 @@ const LoginView = () => {
             <AlertLogInRegister
               onCloseErrorHandler={onCloseErrorHandler}
               error={error}
+              showModal={showModal}
             />
             <TextField
               margin="normal"

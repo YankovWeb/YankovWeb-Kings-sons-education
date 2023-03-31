@@ -1,33 +1,27 @@
 import {createContext, useContext, useEffect, useState} from "react";
-import {
-  createUserWithEmailAndPassword,
-  signInWithEmailAndPassword,
-  onIdTokenChanged,
-  signOut,
-  GoogleAuthProvider,
-  signInWithPopup,
-} from "firebase/auth";
+import {onIdTokenChanged} from "firebase/auth";
 import {auth} from "../config/firebase";
+import {
+  logIn,
+  signUp,
+  logOut,
+  googleSignIn,
+} from "../serivces/user/AuthService";
 
 const userAuthContext = createContext();
 
 export function UserAuthContextProvider({children}) {
   const [user, setUser] = useState({});
 
-  function logIn(email, password) {
-    return signInWithEmailAndPassword(auth, email, password);
-  }
-  function signUp(email, password) {
-    return createUserWithEmailAndPassword(auth, email, password);
-  }
-  function logOut() {
-    return signOut(auth);
-  }
-  function googleSignIn() {
-    const googleAuthProvider = new GoogleAuthProvider();
-    return signInWithPopup(auth, googleAuthProvider);
-  }
-
+  const logInUser = async (email, password) => {
+    return await logIn(auth, email, password);
+  };
+  const signUpUser = async (email, password) => {
+    return await signUp(auth, email, password);
+  };
+  const logOutUser = async () => {
+    return await logOut(auth);
+  };
   useEffect(() => {
     const unsubscribe = onIdTokenChanged(auth, (currentuser) => {
       console.log("Auth", currentuser);
@@ -41,7 +35,7 @@ export function UserAuthContextProvider({children}) {
 
   return (
     <userAuthContext.Provider
-      value={{user, logIn, signUp, logOut, googleSignIn}}
+      value={{user, logInUser, signUpUser, logOutUser, googleSignIn}}
     >
       {children}
     </userAuthContext.Provider>

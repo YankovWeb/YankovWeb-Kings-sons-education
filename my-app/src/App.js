@@ -9,6 +9,7 @@ import Create from "./pages/Create";
 import {UserAuthContextProvider} from "./context/AuthContext";
 import {FirestoreContextUsersProvider} from "./context/UserContext";
 import Home from "./pages/Home";
+import CourseDetail from "./Atoms/Details";
 
 const router = createBrowserRouter([
   {
@@ -32,12 +33,16 @@ const router = createBrowserRouter([
         element: <Catalog />,
       },
       {
-        path: "/my catalog",
+        path: "/my-catalog",
         element: <MyCatalog />,
       },
       {
-        path: "/create class",
+        path: "/create-class",
         element: <Create />,
+      },
+      {
+        path: "/view",
+        element: <CourseDetail />,
       },
     ],
 
@@ -49,7 +54,7 @@ const App = () => {
   return (
     <UserAuthContextProvider>
       <FirestoreContextUsersProvider>
-        <RouterProvider router={router} />{" "}
+        <RouterProvider router={router} />
       </FirestoreContextUsersProvider>
     </UserAuthContextProvider>
   );

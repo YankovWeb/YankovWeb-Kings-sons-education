@@ -7,7 +7,7 @@ const StyledForm = styled("form")({
   alignItems: "center",
   gap: "1rem",
 });
-
+// setting fieldsets
 const StyledTextField = styled(TextField)({
   "& .MuiOutlinedInput-root": {
     "& fieldset": {
@@ -33,6 +33,8 @@ const FormContainer = styled(Container)({
   borderRadius: "10px",
 });
 
+//Start of the componnent
+
 const CreateClass = () => {
   const [values, setValues] = useState({
     image: "",
@@ -40,6 +42,7 @@ const CreateClass = () => {
     description: "",
     ownerId: "",
   });
+
   const userId = 123;
   const handleSubmit = async (event) => {
     event.preventDefault();
@@ -76,6 +79,39 @@ const CreateClass = () => {
           variant="outlined"
           fullWidth
           rows={2}
+        />
+        <StyledTextField
+          id="heading"
+          name="heading"
+          label="Heading"
+          type="text"
+          value={values.heading}
+          onChange={handleChange}
+          margin="normal"
+          variant="outlined"
+          fullWidth
+        />
+        <StyledTextField
+          id="heading"
+          name="heading"
+          label="Heading"
+          type="text"
+          value={values.heading}
+          onChange={handleChange}
+          margin="normal"
+          variant="outlined"
+          fullWidth
+        />
+        <StyledTextField
+          id="heading"
+          name="heading"
+          label="Heading"
+          type="text"
+          value={values.heading}
+          onChange={handleChange}
+          margin="normal"
+          variant="outlined"
+          fullWidth
         />
         <StyledTextField
           id="heading"

@@ -20,17 +20,17 @@ import {NavLink} from "react-router-dom";
 
 const ResponsiveAppBar = () => {
   const pages = ["home", "login", "register", "catalog"];
-  const pagesLogIn = ["home", "catalog", "my catalog", "create class"];
+  const pagesLogIn = ["home", "catalog", "my-catalog", "create-class"];
   const settings = ["Profile", "Dashboard"];
 
   const [anchorElNav, setAnchorElNav] = useState(null);
   const [anchorElUser, setAnchorElUser] = useState(null);
   const navigate = useNavigate();
-  const {logOut, user} = useUserAuth();
+  const {user, logOutUser} = useUserAuth();
 
   const handleLogout = async () => {
     try {
-      await logOut();
+      await logOutUser();
       navigate("/home");
     } catch (error) {
       alert(error.message);
@@ -86,7 +86,6 @@ const ResponsiveAppBar = () => {
                 display: {xs: "block", md: "none"},
               }}
             >
-              {" "}
               {!user
                 ? pages.map((page) => (
                     <MenuItem key={page} onClick={handleCloseNavMenu}>
@@ -125,6 +124,7 @@ const ResponsiveAppBar = () => {
             {!user
               ? pages.map((page) => (
                   <NavLink
+                    key={page}
                     style={{textDecoration: "none"}}
                     to={`/${page}`}
                     className={({isActive}) =>
@@ -132,7 +132,6 @@ const ResponsiveAppBar = () => {
                     }
                   >
                     <Button
-                      key={page}
                       onClick={handleCloseNavMenu}
                       sx={{my: 2, color: "white", display: "block"}}
                     >
@@ -142,6 +141,7 @@ const ResponsiveAppBar = () => {
                 ))
               : pagesLogIn.map((page) => (
                   <NavLink
+                    key={page}
                     to={`${page}`}
                     style={{textDecoration: "none"}}
                     className={({isActive}) =>
@@ -149,7 +149,6 @@ const ResponsiveAppBar = () => {
                     }
                   >
                     <Button
-                      key={page}
                       onClick={handleCloseNavMenu}
                       sx={{my: 2, color: "white", display: "block"}}
                     >

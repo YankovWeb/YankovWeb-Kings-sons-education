@@ -1,17 +1,17 @@
-import React from "react";
 import Button from "@mui/material/Button";
-import {NavLink} from "react-router-dom";
+import {Link} from "react-router-dom";
 const CatalogButton = ({user}) => {
+  //if user is true
   const buttonOneText = user ? "my catalog" : "login";
   const buttonTwoText = user ? "create class" : "register";
   return (
     <>
-      <NavLink to={"/" + buttonOneText}>
+      <Link to={"/" + buttonOneText} style={{textDecoration: "none"}}>
         <Button variant="contained">{buttonOneText}</Button>
-      </NavLink>{" "}
-      <NavLink to={"/" + buttonTwoText}>
+      </Link>{" "}
+      <Link to={"/" + buttonTwoText} style={{textDecoration: "none"}}>
         <Button variant="outlined">{buttonTwoText}</Button>
-      </NavLink>
+      </Link>
     </>
   );
 };

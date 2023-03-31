@@ -49,7 +49,7 @@ const HomeComponent = () => {
     // Set the `isSubtitleVisible` state to true after a delay
     const timeoutId = setTimeout(() => {
       setIsSubtitleVisible(true);
-    }, 500);
+    }, 1500);
 
     // Clear the timeout if the component unmounts or the `isSubtitleVisible` state is set to true
     return () => {

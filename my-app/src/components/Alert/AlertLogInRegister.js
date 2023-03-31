@@ -1,9 +1,9 @@
 import React from "react";
 import Alert from "@mui/material/Alert";
-const AlertLogInRegister = ({error, onCloseErrorHandler}) => {
+const AlertLogInRegister = ({showModal, error, onCloseErrorHandler}) => {
   return (
-    <div>
-      {error && (
+    <>
+      {showModal && (
         <Alert
           variant="outlined"
           onClose={onCloseErrorHandler}
@@ -12,16 +12,7 @@ const AlertLogInRegister = ({error, onCloseErrorHandler}) => {
           {error}
         </Alert>
       )}
-      {error === "succes" && (
-        <Alert
-          variant="outlined"
-          severity="success"
-          onClose={onCloseErrorHandler}
-        >
-          This is a success alert — check it out!
-        </Alert>
-      )}
-    </div>
+    </>
   );
 };
 

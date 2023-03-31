@@ -6,6 +6,7 @@ import Root from "./routes/Root";
 import Catalog from "./pages/Catalog";
 import MyCatalog from "./pages/MyCatalog";
 import Create from "./pages/Create";
+import Profile from "./components/Profile/Profile";
 import {UserAuthContextProvider} from "./context/AuthContext";
 import {FirestoreContextUsersProvider} from "./context/UserContext";
 import Home from "./pages/Home";
@@ -44,6 +45,7 @@ const router = createBrowserRouter([
         path: "/view",
         element: <CourseDetail />,
       },
+      {path: "/profile", element: <Profile />},
     ],
 
     // errorElement: <ErrorPage />,

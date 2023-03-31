@@ -1,7 +1,5 @@
 import React from "react";
 
-const useProducts = () => {
-  return <div>useProducts</div>;
-};
+const useProducts = () => {};
 
 export default useProducts;

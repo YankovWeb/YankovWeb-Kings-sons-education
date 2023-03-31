@@ -18,7 +18,7 @@ export const FirestoreContextUsersProvider = ({children}) => {
       (userInData) => userInData.id === user?.uid
     );
 
-    return currentUser;
+    return currentUser[0];
   };
 
   const addData = async (newData) => {

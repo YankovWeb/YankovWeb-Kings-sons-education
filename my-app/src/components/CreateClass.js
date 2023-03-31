@@ -1,10 +1,7 @@
 import {useState} from "react";
-
-import {TextField, Button, styled, Typography, Container} from "@mui/material";
-
 import useProducts from "../hooks/useProducts";
-
 import {useUserAuth} from "../context/AuthContext";
+import {TextField, Button, styled, Typography, Container} from "@mui/material";
 
 const StyledForm = styled("form")({
   display: "flex",

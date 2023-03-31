@@ -27,7 +27,7 @@ const RegisterView = () => {
   const [userName, setuserName] = useState("");
   const {signUpUser} = useUserAuth();
   const {addData} = useFireStoreUser();
-  let navigate = useNavigate();
+  const navigate = useNavigate();
 
   const handleSubmit = async (e) => {
     debugger;

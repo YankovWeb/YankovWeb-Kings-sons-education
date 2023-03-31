@@ -13,18 +13,20 @@ const userAuthContext = createContext();
 export function UserAuthContextProvider({children}) {
   const [user, setUser] = useState();
   const [loading, setLoading] = useState(false);
-  const [error, setError] = useState("");
-
+  const [error, setError] = useState(false);
+  const [errorMessage, setErrorMessage] = useState(false);
   const logInUser = async (email, password) => {
     try {
       debugger;
       setLoading(true);
       await logIn(auth, email, password);
 
+      setError(false);
       setLoading(false);
     } catch (error) {
       setLoading(false);
-      setError(error);
+      setErrorMessage(error);
+      setError(true);
     }
   };
   const signUpUser = async (email, password) => {
@@ -50,6 +52,7 @@ export function UserAuthContextProvider({children}) {
         user,
         loading,
         error,
+        errorMessage,
         logInUser,
         signUpUser,
         logOutUser,

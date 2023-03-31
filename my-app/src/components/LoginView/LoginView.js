@@ -27,7 +27,7 @@ const LoginView = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [showModal, setShowModal] = useState(false);
-  const {logInUser, error} = useUserAuth();
+  const {logInUser, error, errorMessage} = useUserAuth();
 
   const navigate = useNavigate();
 
@@ -44,17 +44,12 @@ const LoginView = () => {
   };
 
   const onSubmit = async (e) => {
+    debugger;
     e.preventDefault();
 
-    try {
-      await logInUser(email, password);
-      if (error) {
-        throw error;
-      }
-      navigate("/home");
-    } catch (err) {
-      setShowModal(true);
-    }
+    await logInUser(email, password);
+
+    setShowModal(error);
   };
 
   return (
@@ -96,7 +91,7 @@ const LoginView = () => {
           <Box component="form" sx={{mt: 1}}>
             <AlertLogInRegister
               onCloseErrorHandler={onCloseErrorHandler}
-              error={error}
+              error={errorMessage}
               showModal={showModal}
             />
             <TextField

@@ -9,7 +9,7 @@ const AlertLogInRegister = ({showModal, error, onCloseErrorHandler}) => {
           onClose={onCloseErrorHandler}
           severity="error"
         >
-          {error}
+          {error.code}
         </Alert>
       )}
     </>

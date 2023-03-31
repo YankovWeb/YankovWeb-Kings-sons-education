@@ -48,7 +48,9 @@ const LoginView = () => {
 
     try {
       await logInUser(email, password);
-
+      if (error) {
+        throw error;
+      }
       navigate("/home");
     } catch (err) {
       setShowModal(true);

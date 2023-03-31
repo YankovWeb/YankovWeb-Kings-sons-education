@@ -20,13 +20,12 @@ import {NavLink} from "react-router-dom";
 const ItemsView = ({cards}) => {
   const {user} = useUserAuth();
   const {getUserData} = useFireStoreUser();
-  const owner = getUserData()[0];
+  const owner = getUserData();
 
   //fix the inline css to a styled componnent.
   //important!  bring the bissnes logic here.
   //fix re rendering of avata becouse context calls
 
-  console.log(owner);
   return (
     <div>
       {" "}

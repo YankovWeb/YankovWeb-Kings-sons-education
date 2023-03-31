@@ -47,7 +47,7 @@ const CreateClass = () => {
   const handleSubmit = async (event) => {
     event.preventDefault();
     setValues((prev) => ({...prev, ownerId: userId}));
-    console.log(values);
+
     // TODO: handle form submission
   };
 

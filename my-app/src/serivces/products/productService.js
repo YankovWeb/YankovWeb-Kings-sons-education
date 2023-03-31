@@ -1,5 +1,6 @@
-import {async} from "@firebase/util";
 import {
+  getDocs,
+  getDoc,
   addDoc,
   collection,
   updateDoc,
@@ -16,11 +17,18 @@ export const transformObjectToArrayWithId = (response) => {
 };
 
 export const readAllProducts = async (db, collectionName) => {
-  return await collection(db, collectionName).get();
+  return await getDocs(collection(db, collectionName));
+};
+export const readOneProduct = async (db, collectionName, id) => {
+  const docSnapshot = await getDoc(doc(db, collectionName, id));
+  const data = {id: docSnapshot.id, ...docSnapshot.data()};
+  return data;
 };
 
 export const createProdutItem = async (db, collectionName, newData) => {
-  await addDoc(collection(db, collectionName), newData);
+  const docRef = await addDoc(collection(db, collectionName), newData);
+  const documentData = {id: docRef.id, docRef};
+  return documentData;
 };
 
 export const updateCollectionItem = async (
@@ -30,9 +38,5 @@ export const updateCollectionItem = async (
   updatedData
 ) => await updateDoc(doc(db, collectionName, id), updatedData);
 
-export const deleteColectionItem = async (
-  db,
-  collectionName,
-  id,
-  updatedData
-) => await deleteDoc(db, collectionName, id, updatedData);
+export const deleteColectionItem = async (db, collectionName, id) =>
+  await deleteDoc(doc(db, collectionName, id));

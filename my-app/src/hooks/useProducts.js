@@ -1,13 +1,19 @@
 import {useState, useEffect} from "react";
-import {collection, doc, onSnapshot, deleteDoc} from "firebase/firestore";
+import {collection, onSnapshot} from "firebase/firestore";
+
 import {db} from "../config/firebase";
 import {
   readAllProducts,
+  readOneProduct,
+  createProdutItem,
+  updateCollectionItem,
+  deleteColectionItem,
   transformObjectToArrayWithId,
 } from "../serivces/products/productService";
 
 const useProducts = () => {
   const [allProducts, setAllProducts] = useState([]);
+  const [oneProduct, setOneProduct] = useState({});
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState("");
 
@@ -29,23 +35,24 @@ const useProducts = () => {
   const readOne = async (id) => {
     setLoading(true);
     try {
-      const docRef = doc(db, collectionName, id);
-      const docSnapshot = await docRef.get();
-      const data = {id: docSnapshot.id, ...docSnapshot.data()};
+      const response = await readOneProduct(db, collectionName, id);
+      setOneProduct(response);
       setLoading(false);
-      return data;
     } catch (error) {
       setError(error);
       setLoading(false);
     }
   };
 
-  const createOne = async (data) => {
+  const createOne = async (newData) => {
     setLoading(true);
     try {
-      const docRef = await collection(db, collectionName).add(data);
-      const newData = {id: docRef.id, ...data};
-      setAllProducts([...allProducts, newData]);
+      const newDataResponse = await createProdutItem(
+        db,
+        collectionName,
+        newData
+      );
+      setAllProducts([...allProducts, newDataResponse]);
       setLoading(false);
     } catch (error) {
       setError(error);
@@ -56,8 +63,8 @@ const useProducts = () => {
   const updateOne = async (id, updatedData) => {
     setLoading(true);
     try {
-      const docRef = doc(db, collectionName, id);
-      await docRef.update(updatedData);
+      await updateCollectionItem(db, collectionName, id, updatedData);
+
       const updatedArray = allProducts.map((item) =>
         item.id === id ? {...item, ...updatedData} : item
       );
@@ -72,7 +79,7 @@ const useProducts = () => {
   const deleteOne = async (id) => {
     setLoading(true);
     try {
-      await deleteDoc(doc(db, collectionName, id));
+      await deleteColectionItem(db, collectionName, id);
       const filteredArray = allProducts.filter((item) => item.id !== id);
       setAllProducts(filteredArray);
       setLoading(false);
@@ -99,6 +106,7 @@ const useProducts = () => {
 
   return {
     allProducts,
+    oneProduct,
     loading,
     error,
     readAll,

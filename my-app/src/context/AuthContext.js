@@ -61,6 +61,6 @@ export function UserAuthContextProvider({children}) {
   );
 }
 
-export function useUserAuth() {
+export const useUserAuth = () => {
   return useContext(userAuthContext);
-}
+};

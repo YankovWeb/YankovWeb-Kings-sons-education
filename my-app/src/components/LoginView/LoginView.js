@@ -18,7 +18,7 @@ import AlertLogInRegister from "../Alert/AlertLogInRegister";
 import {useUserAuth} from "../../context/AuthContext";
 
 import Copyright from "../../Atoms/CoppyRigth";
-//get from contest useSignIn
+//get from context useSignIn
 //get from context Auth
 //if auth not render the this
 //use signIn from context

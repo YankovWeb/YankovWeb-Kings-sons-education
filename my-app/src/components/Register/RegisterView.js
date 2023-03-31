@@ -12,32 +12,31 @@ import {
 } from "@mui/material";
 
 import LockOutlinedIcon from "@mui/icons-material/LockOutlined";
+import AlertLogInRegister from "../Alert/AlertLogInRegister";
 
+import Copyright from "../../Atoms/CoppyRigth";
 import {NavLink, useNavigate} from "react-router-dom";
-import {useState} from "react";
+import useShowAlert from "../../hooks/useShowAlert";
 import {useUserAuth} from "../../context/AuthContext";
 import {useFireStoreUser} from "../../context/UserContext";
-import AlertLogInRegister from "../Alert/AlertLogInRegister";
-import Copyright from "../../Atoms/CoppyRigth";
+import useFormData from "../../hooks/useFormData";
 
 const RegisterView = () => {
-  const [email, setEmail] = useState("");
-  const [error, setError] = useState(false);
-  const [password, setPassword] = useState("");
-  const [userName, setuserName] = useState("");
-  const {signUpUser} = useUserAuth();
+  const [formData, handleFormChange] = useFormData();
+  const {signUpUser, errorMessage: authError} = useUserAuth();
   const {addData} = useFireStoreUser();
+  const [showModal, setShowModal, onCloseErrorHandler] = useShowAlert();
   const navigate = useNavigate();
 
   const handleSubmit = async (e) => {
     debugger;
     e.preventDefault();
-    setError("");
+
     try {
-      const response = await signUpUser(email, password);
+      const response = await signUpUser(formData);
 
       const obj = {
-        userName: userName,
+        userName: formData.userName,
         email: response.user.email,
         creatAt: response.user.metadata.creationTime,
         lastSignIn: response.user.metadata.lastSignInTime,
@@ -46,21 +45,8 @@ const RegisterView = () => {
       await addData(obj);
       navigate("/home");
     } catch (err) {
-      alert(err);
+      setShowModal(true);
     }
-  };
-
-  const onEmailCHangeHandler = (e) => {
-    setEmail(e.target.value);
-  };
-  const onPasswordCHangeHandler = (e) => {
-    setPassword(e.target.value);
-  };
-  const onUserNameCHangeHandler = (e) => {
-    setuserName(e.target.value);
-  };
-  const onCloseErrorHandler = () => {
-    setError(false);
   };
 
   return (
@@ -80,12 +66,13 @@ const RegisterView = () => {
         <Typography component="h1" variant="h5">
           Sign up
         </Typography>
-        {error && (
-          <AlertLogInRegister
-            onCloseErrorHandler={onCloseErrorHandler}
-            error={error}
-          />
-        )}
+
+        <AlertLogInRegister
+          onCloseErrorHandler={onCloseErrorHandler}
+          showModal={showModal}
+          error={authError}
+        />
+
         <Box component="form" noValidate onSubmit={handleSubmit} sx={{mt: 3}}>
           <Grid container spacing={2}>
             <Grid item xs={12}>
@@ -96,8 +83,8 @@ const RegisterView = () => {
                 label="User Name"
                 name="UserName"
                 autoComplete="UserName"
-                onChange={onUserNameCHangeHandler}
-                value={userName}
+                onChange={handleFormChange}
+                value={formData.userName}
               />
             </Grid>
             <Grid item xs={12}>
@@ -108,8 +95,8 @@ const RegisterView = () => {
                 label="Email Address"
                 name="email"
                 autoComplete="email"
-                onChange={onEmailCHangeHandler}
-                value={email}
+                onChange={handleFormChange}
+                value={formData.email}
               />
             </Grid>
             <Grid item xs={12}>
@@ -121,8 +108,8 @@ const RegisterView = () => {
                 type="password"
                 id="password"
                 autoComplete="new-password"
-                onChange={onPasswordCHangeHandler}
-                value={password}
+                onChange={handleFormChange}
+                value={formData.password}
               />
             </Grid>
             <Grid item xs={12}>

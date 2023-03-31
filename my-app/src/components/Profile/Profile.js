@@ -11,6 +11,7 @@ const Profile = () => {
       <h1> {currentUser?.email} </h1>
       <h1> {currentUser?.lastSignIn} </h1>
       <h1> {currentUser?.creatAt} </h1>
+      <h1> {currentUser?.userName} </h1>
     </>
   );
 };

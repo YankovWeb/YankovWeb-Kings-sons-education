@@ -1,4 +1,10 @@
-import {createContext, useContext, useEffect, useState} from "react";
+import {
+  createContext,
+  useContext,
+  useEffect,
+  useState,
+  useCallback,
+} from "react";
 import {onIdTokenChanged} from "firebase/auth";
 import {auth} from "../config/firebase";
 import {
@@ -15,12 +21,24 @@ export function UserAuthContextProvider({children}) {
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(false);
   const [errorMessage, setErrorMessage] = useState(false);
-  const logInUser = async (email, password) => {
-    try {
-      debugger;
-      setLoading(true);
-      await logIn(auth, email, password);
 
+  const logInUser = useCallback(async (formData) => {
+    try {
+      setLoading(true);
+      await logIn(auth, formData.email, formData.password);
+      setError(false);
+      setLoading(false);
+    } catch (error) {
+      setLoading(false);
+      setErrorMessage(error);
+      setError(true);
+      throw error;
+    }
+  }, []);
+  const signUpUser = async (formData) => {
+    try {
+      setLoading(true);
+      await signUp(auth, formData.email, formData.password);
       setError(false);
       setLoading(false);
     } catch (error) {
@@ -28,9 +46,6 @@ export function UserAuthContextProvider({children}) {
       setErrorMessage(error);
       setError(true);
     }
-  };
-  const signUpUser = async (email, password) => {
-    return await signUp(auth, email, password);
   };
   const logOutUser = async () => {
     return await logOut(auth);

@@ -1,5 +1,10 @@
 import {useState} from "react";
+
 import {TextField, Button, styled, Typography, Container} from "@mui/material";
+
+import useProducts from "../hooks/useProducts";
+
+import {useUserAuth} from "../context/AuthContext";
 
 const StyledForm = styled("form")({
   display: "flex",
@@ -7,6 +12,7 @@ const StyledForm = styled("form")({
   alignItems: "center",
   gap: "1rem",
 });
+
 // setting fieldsets
 const StyledTextField = styled(TextField)({
   "& .MuiOutlinedInput-root": {
@@ -42,12 +48,14 @@ const CreateClass = () => {
     description: "",
     ownerId: "",
   });
+  const {createOne, loading, error} = useProducts();
 
-  const userId = 123;
+  const {user} = useUserAuth();
+
   const handleSubmit = async (event) => {
     event.preventDefault();
-    setValues((prev) => ({...prev, ownerId: userId}));
-
+    setValues((prev) => ({...prev, ownerId: user.uid}));
+    await createOne(values);
     // TODO: handle form submission
   };
 

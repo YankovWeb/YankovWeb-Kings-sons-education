@@ -3,29 +3,35 @@ import {collection, doc, onSnapshot, deleteDoc} from "firebase/firestore";
 import {db} from "../config/firebase";
 import {useUserAuth} from "../context/AuthContext";
 import {createUser, updateUser} from "../serivces/user/userService";
+//create a new context object for Firestore data
 const FirestoreContext = createContext();
-
+//create a provider component
 export const FirestoreContextUsersProvider = ({children}) => {
-  const [data, setData] = useState([]);
+  //Declare state
+  const [usersCollection, setUsersCollection] = useState([]);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState("");
+  //get current logged-in user from AuthContext
   const {user} = useUserAuth();
 
+  //Note: the user collection
   const collectionName = "users";
-
+  // A function that retrieves the currently logged-in user's data from the usersCollection state
+  //update with useCallBack
   const getUserData = () => {
-    const [currentUser] = data.filter(
+    const [currentUser] = usersCollection.filter(
       (userInData) => userInData.id === user?.uid
     );
 
     return currentUser;
   };
+  // A function that adds a new document to the Firestore collection
 
   const addData = async (newData) => {
     try {
       setLoading(true);
       const docRef = await createUser(db, collectionName, newData);
-      setData([...data, {id: docRef.id, ...newData}]);
+      setUsersCollection([...usersCollection, {id: docRef.id, ...newData}]);
       setLoading(false);
     } catch (error) {
       setError(error);
@@ -38,10 +44,10 @@ export const FirestoreContextUsersProvider = ({children}) => {
     try {
       setLoading(true);
       await updateUser(db, collectionName, id, updatedData);
-      const updatedArray = data.map((item) =>
+      const updatedArray = usersCollection.map((item) =>
         item.id === id ? {...item, ...updatedData} : item
       );
-      setData(updatedArray);
+      setUsersCollection(updatedArray);
       setLoading(false);
     } catch (error) {
       setError(error);
@@ -54,8 +60,8 @@ export const FirestoreContextUsersProvider = ({children}) => {
     try {
       setLoading(true);
       await deleteDoc(doc(db, collectionName, id));
-      const filteredArray = data.filter((item) => item.id !== id);
-      setData(filteredArray);
+      const filteredArray = usersCollection.filter((item) => item.id !== id);
+      setUsersCollection(filteredArray);
       setLoading(false);
     } catch (error) {
       setError(error);
@@ -72,7 +78,7 @@ export const FirestoreContextUsersProvider = ({children}) => {
         querySnapshot.forEach((doc) => {
           dataArray.push({id: doc.id, ...doc.data()});
         });
-        setData(dataArray);
+        setUsersCollection(dataArray);
       }
     );
 
@@ -82,7 +88,7 @@ export const FirestoreContextUsersProvider = ({children}) => {
   return (
     <FirestoreContext.Provider
       value={{
-        data,
+        usersCollection,
         loading,
         error,
         getUserData,

@@ -20,7 +20,7 @@ import Copyright from "../../Atoms/CoppyRigth";
 
 const RegisterView = () => {
   const [email, setEmail] = useState("");
-  const [error, setError] = useState("");
+  const [error, setError] = useState(false);
   const [password, setPassword] = useState("");
   const [userName, setuserName] = useState("");
   const {signUpUser} = useUserAuth();
@@ -28,6 +28,7 @@ const RegisterView = () => {
   let navigate = useNavigate();
 
   const handleSubmit = async (e) => {
+    debugger;
     e.preventDefault();
     setError("");
     try {
@@ -43,7 +44,7 @@ const RegisterView = () => {
       await addData(obj);
       navigate("/home");
     } catch (err) {
-      setError(err.code);
+      alert(err);
     }
   };
 

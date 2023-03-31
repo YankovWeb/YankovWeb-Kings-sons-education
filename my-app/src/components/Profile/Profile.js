@@ -3,14 +3,14 @@ import {useFireStoreUser} from "../../context/UserContext";
 const Profile = () => {
   const {getUserData} = useFireStoreUser();
   const currentUser = getUserData();
-  console.log(currentUser);
+
   return (
     <>
       <div>Profile</div>
-      <h1> {currentUser.id} </h1>
-      <h1> {currentUser.email} </h1>
-      <h1> {currentUser.lastSignIn} </h1>
-      <h1> {currentUser.creatAt} </h1>
+      <h1> {currentUser?.id} </h1>
+      <h1> {currentUser?.email} </h1>
+      <h1> {currentUser?.lastSignIn} </h1>
+      <h1> {currentUser?.creatAt} </h1>
     </>
   );
 };

@@ -56,13 +56,11 @@ const HomeComponent = () => {
       clearTimeout(timeoutId);
     };
   }, []);
-  console.log(curetUser);
+  console.log({curetUser});
   return (
     <>
       <Header>
-        <Title>
-          Welcome to our Educational School {curetUser[0]?.userName}
-        </Title>
+        <Title>Welcome to our Educational School </Title>
       </Header>
       <Content>
         <Subtitle className={isSubtitleVisible ? "fade-in" : ""}>

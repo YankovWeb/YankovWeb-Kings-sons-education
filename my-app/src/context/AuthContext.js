@@ -6,7 +6,7 @@ import {
   signUp,
   logOut,
   googleSignIn,
-} from "../serivces/user/AuthService";
+} from "../serivces/user/authService";
 
 const userAuthContext = createContext();
 

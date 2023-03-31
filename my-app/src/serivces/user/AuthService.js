@@ -15,9 +15,7 @@ export const signUp = (auth, email, password) => {
 };
 
 export const logOut = async (auth) => {
-  const data = await signOut(auth);
-
-  return data;
+  return await signOut(auth);
 };
 
 export const googleSignIn = (auth) => {

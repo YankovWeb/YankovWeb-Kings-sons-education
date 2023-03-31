@@ -2,7 +2,7 @@ import {createContext, useState, useEffect, useContext} from "react";
 import {collection, doc, onSnapshot, deleteDoc} from "firebase/firestore";
 import {db} from "../config/firebase";
 import {useUserAuth} from "../context/AuthContext";
-import {createUser, updateUser} from "../serivces/user/UserService";
+import {createUser, updateUser} from "../serivces/user/userService";
 const FirestoreContext = createContext();
 
 export const FirestoreContextUsersProvider = ({children}) => {
@@ -14,11 +14,11 @@ export const FirestoreContextUsersProvider = ({children}) => {
   const collectionName = "users";
 
   const getUserData = () => {
-    const currentUser = data.filter(
+    const [currentUser] = data.filter(
       (userInData) => userInData.id === user?.uid
     );
 
-    return currentUser[0];
+    return currentUser;
   };
 
   const addData = async (newData) => {

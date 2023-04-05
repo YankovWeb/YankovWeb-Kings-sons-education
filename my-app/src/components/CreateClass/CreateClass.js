@@ -3,7 +3,7 @@ import {useUserAuth} from "../../context/AuthContext";
 import useFormData from "../../hooks/useFormData";
 import CreateClassAtom from "../../Atoms/CreateClassAtom";
 import Loader from "../../UI/Loader";
-import {useMemo} from "react";
+import {useEffect, useMemo} from "react";
 
 const CreateClass = () => {
   const {user} = useUserAuth();
@@ -18,15 +18,18 @@ const CreateClass = () => {
     [user]
   );
   const {formData, handleFormChange, resetForm} = useFormData(initialState);
-  const {createOne, loading, error} = useCreate();
+  const {createOne, loading, error, isSuccess, unfold} = useCreate();
 
   const handleSubmit = (event) => {
     event.preventDefault();
-
-    createOne(formData).then(resetForm(initialState));
-    // TODO: handle form submission
+    createOne(formData);
   };
-
+  useEffect(() => {
+    if (isSuccess) {
+      resetForm(initialState);
+      unfold();
+    }
+  }, [isSuccess, resetForm, initialState, unfold]);
   return (
     <>
       {loading ? (

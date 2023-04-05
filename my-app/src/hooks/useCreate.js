@@ -4,13 +4,16 @@ import {db} from "../config/firebase";
 import {createProdutItem} from "../serivces/products/productService";
 
 const useCreate = () => {
+  const [isSuccess, setSuccess] = useState(false);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(false);
   const collectionName = "products";
 
   const patern = /\.(jpg|jpeg|png|webp|avif|gif|svg)$/;
   const isImage = (url) => patern.test(url);
-
+  const unfold = () => {
+    setSuccess(false);
+  };
   const createOne = async (newData) => {
     setLoading(true);
 
@@ -33,6 +36,7 @@ const useCreate = () => {
         success: "Created! 👌",
         error: "Someting got wron🤯",
       });
+      setSuccess(true);
       setLoading(false);
     } catch (error) {
       setError(true);
@@ -44,6 +48,8 @@ const useCreate = () => {
     createOne,
     loading,
     error,
+    isSuccess,
+    unfold,
   };
 };
 

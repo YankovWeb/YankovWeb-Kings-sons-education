@@ -8,13 +8,18 @@ const CustonCardButtons = ({card, user, children}) => {
         variant="contained"
         size="small"
         component={Link}
-        to={"/catalog/view"}
+        to={`/catalog/view/${card.id}`}
       >
         View
       </Button>
       {user?.uid === card.ownerId && (
         <>
-          <Button size="small" variant="contained" component={Link} to="/">
+          <Button
+            size="small"
+            variant="contained"
+            component={Link}
+            to={`/catalog/edit/${card.id}`}
+          >
             Edit
           </Button>
           {children}

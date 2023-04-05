@@ -19,7 +19,7 @@ const useReadAll = () => {
       setError(error);
       setLoading(false);
     }
-  }, [collectionName]);
+  }, []);
 
   return {
     readAll,

@@ -37,7 +37,7 @@ const FormContainer = styled(Container)({
 
 const CreateClassAtom = ({formData, handleFormChange, handleSubmit}) => {
   return (
-    <FormContainer maxWidth="xl">
+    <FormContainer maxWidth="sm">
       <Typography variant="h4" align="center">
         Add a new Class
       </Typography>
@@ -50,7 +50,7 @@ const CreateClassAtom = ({formData, handleFormChange, handleSubmit}) => {
           name="image"
           label="Image URL"
           type="url"
-          value={formData ? formData.image : ""}
+          value={formData?.image || ""}
           onChange={handleFormChange}
           margin="normal"
           variant="outlined"
@@ -58,11 +58,24 @@ const CreateClassAtom = ({formData, handleFormChange, handleSubmit}) => {
           rows={2}
         />
         <StyledTextField
+          id="video"
+          name="video"
+          label="YouTube-Link"
+          type="text"
+          value={formData?.video || ""}
+          onChange={handleFormChange}
+          margin="normal"
+          variant="outlined"
+          fullWidth
+          multiline
+          rows={1}
+        />
+        <StyledTextField
           id="heading"
           name="heading"
           label="Heading"
           type="text"
-          value={formData ? formData.heading : ""}
+          value={formData?.heading || ""}
           onChange={handleFormChange}
           margin="normal"
           variant="outlined"
@@ -74,7 +87,7 @@ const CreateClassAtom = ({formData, handleFormChange, handleSubmit}) => {
           name="description"
           label="Description"
           type="text"
-          value={formData ? formData.description : ""}
+          value={formData?.description || ""}
           onChange={handleFormChange}
           margin="normal"
           variant="outlined"
@@ -82,6 +95,7 @@ const CreateClassAtom = ({formData, handleFormChange, handleSubmit}) => {
           multiline
           rows={4}
         />
+
         <Button
           type="submit"
           variant="contained"

@@ -11,12 +11,13 @@ import {
 
 const CustomCard = ({card, children}) => {
   return (
-    <Grid item key={card.id} xs={12} sm={6} md={4}>
+    <Grid item key={card ? card.id : ""} xs={12} sm={6} md={4}>
       <Card
         sx={{
           height: "100%",
           display: "flex",
           flexDirection: "column",
+          border: 1,
         }}
       >
         <Box
@@ -25,7 +26,7 @@ const CustomCard = ({card, children}) => {
           justifyContent="flex-end"
         >
           <Typography variant="h6" component="h6" marginLeft="1rem">
-            {card.ownerName}
+            {card ? card.ownerName : ""}
           </Typography>
 
           <Avatar alt="Remy Sharp" src="/static/images/avatar/1.jpg" />
@@ -34,17 +35,18 @@ const CustomCard = ({card, children}) => {
         <CardMedia
           component="img"
           sx={{
-            // 16:9
-            pt: "56.25%",
+            pt: "26.25%",
           }}
-          image={card.image}
+          image={card ? card.image : ""}
           alt="random"
         />
         <CardContent sx={{flexGrow: 1}}>
           <Typography gutterBottom variant="h5" component="h2">
-            {card.heading}
+            {card ? card.heading : ""}
           </Typography>
-          <Typography>{card.description}</Typography>
+          <Typography variant="body1">
+            {card ? card.description : ""}
+          </Typography>
         </CardContent>
         <CardActions sx={{justifyContent: "space-between"}}>
           {children}

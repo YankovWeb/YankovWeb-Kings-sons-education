@@ -9,8 +9,8 @@ import Create from "./pages/Create";
 import Profile from "./components/Profile/Profile";
 import {UserAuthContextProvider} from "./context/AuthContext";
 import Home from "./pages/Home";
-import CourseDetail from "./Atoms/Details";
-
+import CourseDetailsView from "./components/CourseDetailsView/CourseDetailsView";
+import Edit from "./components/Edit/Edit";
 const router = createBrowserRouter([
   {
     path: "/",
@@ -41,8 +41,12 @@ const router = createBrowserRouter([
         element: <Create />,
       },
       {
-        path: "/catalog/view",
-        element: <CourseDetail />,
+        path: "/catalog/view/:id",
+        element: <CourseDetailsView />,
+      },
+      {
+        path: "/catalog/edit/:id",
+        element: <Edit />,
       },
       {path: "/profile", element: <Profile />},
     ],

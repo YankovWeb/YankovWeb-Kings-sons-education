@@ -30,7 +30,7 @@ const useDeleteOne = () => {
   };
   useEffect(() => {
     setIsDeleteClick(false);
-  }, []);
+  }, [isDeleteClick]);
 
   return {
     deleteOne,

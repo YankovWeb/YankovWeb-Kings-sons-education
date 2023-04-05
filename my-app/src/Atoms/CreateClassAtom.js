@@ -35,13 +35,7 @@ const FormContainer = styled(Container)({
 
 //Start of the componnent
 
-const CreateClassAtom = ({
-  formData,
-  handleFormChange,
-  handleSubmit,
-  isTrue,
-  message,
-}) => {
+const CreateClassAtom = ({formData, handleFormChange, handleSubmit}) => {
   return (
     <FormContainer maxWidth="xl">
       <Typography variant="h4" align="center">
@@ -52,8 +46,6 @@ const CreateClassAtom = ({
       </Typography>
       <StyledForm>
         <StyledTextField
-          //error={isTrue}
-          //helperText={message && message}
           id="image"
           name="image"
           label="Image URL"

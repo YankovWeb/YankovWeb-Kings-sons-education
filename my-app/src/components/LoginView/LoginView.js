@@ -20,7 +20,7 @@ import Loader from "../../UI/Loader";
 //use signIn from context
 
 const LoginView = () => {
-  const [formData, handleFormChange] = useFormData({
+  const {formData, handleFormChange} = useFormData({
     email: "",
     password: "",
   });

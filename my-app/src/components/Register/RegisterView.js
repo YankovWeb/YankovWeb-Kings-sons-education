@@ -20,7 +20,7 @@ import {useUserAuth} from "../../context/AuthContext";
 import useFormData from "../../hooks/useFormData";
 
 const RegisterView = () => {
-  const [formData, handleFormChange] = useFormData({
+  const {formData, handleFormChange} = useFormData({
     displayName: "",
     email: "",
     password: "",

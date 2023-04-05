@@ -8,7 +8,6 @@ import MyCatalog from "./pages/MyCatalog";
 import Create from "./pages/Create";
 import Profile from "./components/Profile/Profile";
 import {UserAuthContextProvider} from "./context/AuthContext";
-import {FirestoreContextUsersProvider} from "./context/UserContext";
 import Home from "./pages/Home";
 import CourseDetail from "./Atoms/Details";
 
@@ -42,7 +41,7 @@ const router = createBrowserRouter([
         element: <Create />,
       },
       {
-        path: "/view",
+        path: "/catalog/view",
         element: <CourseDetail />,
       },
       {path: "/profile", element: <Profile />},
@@ -55,9 +54,7 @@ const router = createBrowserRouter([
 const App = () => {
   return (
     <UserAuthContextProvider>
-      <FirestoreContextUsersProvider>
-        <RouterProvider router={router} />
-      </FirestoreContextUsersProvider>
+      <RouterProvider router={router} />
     </UserAuthContextProvider>
   );
 };

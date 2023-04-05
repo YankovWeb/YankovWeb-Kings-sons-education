@@ -1,5 +1,5 @@
 import React from "react";
-import CreateClass from "../components/CreateClass";
+import CreateClass from "../components/CreateClass/CreateClass";
 const Create = () => {
   return <CreateClass />;
 };

@@ -1,17 +1,17 @@
 import React from "react";
-import {useFireStoreUser} from "../../context/UserContext";
+
+import {useUserAuth} from "../../context/AuthContext";
 const Profile = () => {
-  const {getUserData} = useFireStoreUser();
-  const currentUser = getUserData();
+  const {user} = useUserAuth();
 
   return (
     <>
       <div>Profile</div>
-      <h1> {currentUser?.id} </h1>
-      <h1> {currentUser?.email} </h1>
-      <h1> {currentUser?.lastSignIn} </h1>
-      <h1> {currentUser?.creatAt} </h1>
-      <h1> {currentUser?.userName} </h1>
+      <h1> {user?.user?.uid} </h1>
+      <h1> {user?.user?.email} </h1>
+      <h1> {user?.user?.metadata?.lastSignInTime} </h1>
+      <h1> {user?.user?.metadata?.creationTime} </h1>
+      <h1> {user?.user?.displayName} </h1>
     </>
   );
 };

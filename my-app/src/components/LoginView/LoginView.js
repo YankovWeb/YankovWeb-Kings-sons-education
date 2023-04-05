@@ -1,68 +1,49 @@
 import Avatar from "@mui/material/Avatar";
-
 import Button from "@mui/material/Button";
 import CssBaseline from "@mui/material/CssBaseline";
 import TextField from "@mui/material/TextField";
-
 import Link from "@mui/material/Link";
 import Paper from "@mui/material/Paper";
 import Box from "@mui/material/Box";
 import Grid from "@mui/material/Grid";
 import LockOutlinedIcon from "@mui/icons-material/LockOutlined";
 import Typography from "@mui/material/Typography";
-
 import {useNavigate, NavLink} from "react-router-dom";
-
-import AlertLogInRegister from "../Alert/AlertLogInRegister";
-
 import {useUserAuth} from "../../context/AuthContext";
 import useFormData from "../../hooks/useFormData";
 import Copyright from "../../Atoms/CoppyRigth";
-import useShowAlert from "../../hooks/useShowAlert";
+import ImageGrid from "../../Atoms/ImageGrid";
+import Loader from "../../UI/Loader";
 //get from context useSignIn
 //get from context Auth
 //if auth not render the this
 //use signIn from context
 
 const LoginView = () => {
-  const [formData, handleFormChange] = useFormData();
-  const [showModal, setShowModal, onCloseErrorHandler] = useShowAlert();
-  const {logInUser, error, errorMessage} = useUserAuth();
+  const [formData, handleFormChange] = useFormData({
+    email: "",
+    password: "",
+  });
 
+  const {logInUser, loading} = useUserAuth();
   const navigate = useNavigate();
 
   const onSubmit = async (e) => {
     e.preventDefault();
-    try {
-      await logInUser(formData);
 
-      navigate("/profile");
-    } catch (erro) {
-      setShowModal(true);
+    const response = await logInUser(formData);
+    if (response !== null) {
+      navigate("/Profile");
     }
   };
+  if (loading) {
+    return <Loader />;
+  }
 
-  console.log(error, showModal);
   return (
     <Grid container component="main" sx={{height: "93.6vh"}}>
       <CssBaseline />
-      <Grid
-        item
-        xs={false}
-        sm={4}
-        md={7}
-        sx={{
-          backgroundImage:
-            "url(https://cdn.dribbble.com/users/2486875/screenshots/5534832/education.gif)",
-          backgroundRepeat: "no-repeat",
-          backgroundColor: (t) =>
-            t.palette.mode === "light"
-              ? t.palette.grey[50]
-              : t.palette.grey[900],
-          backgroundSize: "cover",
-          backgroundPosition: "center",
-        }}
-      />
+      <ImageGrid />
       <Grid item xs={12} sm={8} md={5} component={Paper} elevation={6} square>
         <Box
           sx={{
@@ -79,12 +60,7 @@ const LoginView = () => {
           <Typography component="h1" variant="h5">
             Sign in
           </Typography>
-          <Box component="form" sx={{mt: 1}}>
-            <AlertLogInRegister
-              onCloseErrorHandler={onCloseErrorHandler}
-              error={errorMessage}
-              showModal={showModal}
-            />
+          <Box component="form" noValidate onSubmit={onSubmit} sx={{mt: 1}}>
             <TextField
               margin="normal"
               required
@@ -115,7 +91,6 @@ const LoginView = () => {
               fullWidth
               variant="contained"
               sx={{mt: 3, mb: 2}}
-              onClick={onSubmit}
             >
               Sign In
             </Button>

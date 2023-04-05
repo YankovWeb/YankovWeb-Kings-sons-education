@@ -1,18 +1,18 @@
-import Button from "@mui/material/Button";
+import {Button, Stack} from "@mui/material";
 import {Link} from "react-router-dom";
 const CatalogButton = ({user}) => {
   //if user is true
   const buttonOneText = user ? "my-catalog" : "login";
   const buttonTwoText = user ? "create-class" : "register";
   return (
-    <>
-      <Link to={"/" + buttonOneText} style={{textDecoration: "none"}}>
-        <Button variant="contained">{buttonOneText}</Button>
-      </Link>{" "}
-      <Link to={"/" + buttonTwoText} style={{textDecoration: "none"}}>
-        <Button variant="outlined">{buttonTwoText}</Button>
-      </Link>
-    </>
+    <Stack sx={{pt: 4}} direction="row" spacing={2} justifyContent="center">
+      <Button variant="contained" component={Link} to={"/" + buttonOneText}>
+        {buttonOneText}
+      </Button>
+      <Button variant="outlined" component={Link} to={"/" + buttonTwoText}>
+        {buttonTwoText}
+      </Button>
+    </Stack>
   );
 };
 

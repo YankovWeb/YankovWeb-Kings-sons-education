@@ -1,54 +1,78 @@
-import {
-  createContext,
-  useContext,
-  useEffect,
-  useState,
-  useCallback,
-} from "react";
-import {onIdTokenChanged} from "firebase/auth";
+import {createContext, useContext, useEffect, useState} from "react";
+import {onIdTokenChanged, updateProfile} from "firebase/auth";
 import {auth} from "../config/firebase";
-import {
-  logIn,
-  signUp,
-  logOut,
-  googleSignIn,
-} from "../serivces/user/authService";
+import {logIn, signUp, logOut} from "../serivces/user/authService";
+import {toast} from "react-toastify";
+import Toast from "../UI/Toast";
+import "react-toastify/dist/ReactToastify.css";
 
 const userAuthContext = createContext();
 
 export function UserAuthContextProvider({children}) {
-  const [user, setUser] = useState();
+  const [user, setUser] = useState(null);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(false);
-  const [errorMessage, setErrorMessage] = useState(false);
+  const [errorMessage, setErrorMessage] = useState("");
 
-  const logInUser = useCallback(async (formData) => {
+  const logInUser = async (formData) => {
     try {
       setLoading(true);
-      await logIn(auth, formData.email, formData.password);
+      await toast.promise(logIn(auth, formData.email, formData.password), {
+        pending: "Connecting...",
+        success: "Welcome! 👌",
+      });
       setError(false);
       setLoading(false);
     } catch (error) {
       setLoading(false);
       setErrorMessage(error);
       setError(true);
-      throw error;
+      toast.error(`${error.code}`);
+      throw new Error(error);
     }
-  }, []);
+  };
+
   const signUpUser = async (formData) => {
     try {
       setLoading(true);
-      await signUp(auth, formData.email, formData.password);
+      await toast.promise(signUp(auth, formData.email, formData.password), {
+        pending: "Connecting...",
+        success: "Created! 👌",
+      });
+      if (auth.currentUser !== null) {
+        await updateProfile(auth.currentUser, {
+          displayName: formData.displayName,
+        });
+      }
+
+      // Set the display name for the newly created user
+
       setError(false);
       setLoading(false);
+      toast.success(`Welcome`);
     } catch (error) {
       setLoading(false);
       setErrorMessage(error);
       setError(true);
+      toast.error(`${error.code}`);
     }
   };
+
   const logOutUser = async () => {
-    return await logOut(auth);
+    try {
+      setLoading(true);
+      setError(false);
+      setLoading(false);
+      await toast.promise(logOut(auth), {
+        pending: "Connecting...",
+        success: "Goodbye! 👌",
+      });
+    } catch (error) {
+      setLoading(false);
+      setErrorMessage(error);
+      setError(true);
+      toast.error("Something got wrong!");
+    }
   };
   useEffect(() => {
     const unsubscribe = onIdTokenChanged(auth, (currentuser) => {
@@ -60,22 +84,24 @@ export function UserAuthContextProvider({children}) {
       unsubscribe();
     };
   }, []);
-
+  console.log("context render");
   return (
-    <userAuthContext.Provider
-      value={{
-        user,
-        loading,
-        error,
-        errorMessage,
-        logInUser,
-        signUpUser,
-        logOutUser,
-        googleSignIn,
-      }}
-    >
-      {children}
-    </userAuthContext.Provider>
+    <>
+      <Toast />
+      <userAuthContext.Provider
+        value={{
+          user,
+          loading,
+          error,
+          errorMessage,
+          logInUser,
+          signUpUser,
+          logOutUser,
+        }}
+      >
+        {children}
+      </userAuthContext.Provider>
+    </>
   );
 }
 

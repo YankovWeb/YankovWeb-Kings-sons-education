@@ -12,7 +12,7 @@ import {
 import LockOutlinedIcon from "@mui/icons-material/LockOutlined";
 import Loader from "../../UI/Loader";
 
-import Copyright from "../../Atoms/CoppyRigth";
+import Copyright from "../../Atoms/Copyright";
 import {NavLink, useNavigate} from "react-router-dom";
 
 import {useUserAuth} from "../../context/AuthContext";
@@ -20,11 +20,7 @@ import {useUserAuth} from "../../context/AuthContext";
 import useFormData from "../../hooks/useFormData";
 
 const RegisterView = () => {
-  const {formData, handleFormChange} = useFormData({
-    displayName: "",
-    email: "",
-    password: "",
-  });
+  const {formData, handleFormChange} = useFormData(null);
   const {signUpUser, loading} = useUserAuth();
   const navigate = useNavigate();
 
@@ -32,13 +28,11 @@ const RegisterView = () => {
     e.preventDefault();
 
     const response = await signUpUser(formData);
+
     if (response !== null) {
       navigate("/Profile");
     }
   };
-  if (loading) {
-    return <Loader />;
-  }
 
   return (
     <Container component="main" maxWidth="xs">
@@ -58,66 +52,70 @@ const RegisterView = () => {
           Sign up
         </Typography>
 
-        <Box component="form" noValidate onSubmit={handleSubmit} sx={{mt: 3}}>
-          <Grid container spacing={2}>
-            <Grid item xs={12}>
-              <TextField
-                required
-                fullWidth
-                id="displayName"
-                label="User Name"
-                name="displayName"
-                autoComplete="UserName"
-                onChange={handleFormChange}
-                value={formData.displayName}
-              />
+        {loading ? (
+          <Loader />
+        ) : (
+          <Box component="form" noValidate onSubmit={handleSubmit} sx={{mt: 3}}>
+            <Grid container spacing={2}>
+              <Grid item xs={12}>
+                <TextField
+                  required
+                  fullWidth
+                  id="displayName"
+                  label="User Name"
+                  name="displayName"
+                  autoComplete="UserName"
+                  onChange={handleFormChange}
+                  value={formData?.displayName || ""}
+                />
+              </Grid>
+              <Grid item xs={12}>
+                <TextField
+                  required
+                  fullWidth
+                  id="email"
+                  label="Email Address"
+                  name="email"
+                  autoComplete="email"
+                  onChange={handleFormChange}
+                  value={formData?.email || ""}
+                />
+              </Grid>
+              <Grid item xs={12}>
+                <TextField
+                  required
+                  fullWidth
+                  name="password"
+                  label="Password"
+                  type="password"
+                  id="password"
+                  autoComplete="new-password"
+                  onChange={handleFormChange}
+                  value={formData?.password || ""}
+                />
+              </Grid>
+              <Grid item xs={12}></Grid>
             </Grid>
-            <Grid item xs={12}>
-              <TextField
-                required
-                fullWidth
-                id="email"
-                label="Email Address"
-                name="email"
-                autoComplete="email"
-                onChange={handleFormChange}
-                value={formData.email}
-              />
+            <Button
+              type="submit"
+              fullWidth
+              variant="contained"
+              sx={{mt: 3, mb: 2}}
+            >
+              Sign Up
+            </Button>
+            <Grid container justifyContent="flex-end">
+              <Grid item>
+                <NavLink
+                  to="/login"
+                  style={{textDecoration: "none", color: "blue"}}
+                >
+                  Already have an account? Sign in
+                </NavLink>
+              </Grid>
             </Grid>
-            <Grid item xs={12}>
-              <TextField
-                required
-                fullWidth
-                name="password"
-                label="Password"
-                type="password"
-                id="password"
-                autoComplete="new-password"
-                onChange={handleFormChange}
-                value={formData.password}
-              />
-            </Grid>
-            <Grid item xs={12}></Grid>
-          </Grid>
-          <Button
-            type="submit"
-            fullWidth
-            variant="contained"
-            sx={{mt: 3, mb: 2}}
-          >
-            Sign Up
-          </Button>
-          <Grid container justifyContent="flex-end">
-            <Grid item>
-              <NavLink
-                to="/login"
-                style={{textDecoration: "none", color: "blue"}}
-              >
-                Already have an account? Sign in
-              </NavLink>
-            </Grid>
-          </Grid>
-        </Box>
+          </Box>
+        )}
       </Box>
       <Copyright sx={{mt: 5}} />
     </Container>

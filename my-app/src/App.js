@@ -4,18 +4,22 @@ import LoginPage from "./pages/LoginPage";
 import Register from "./pages/Register";
 import Root from "./routes/Root";
 import Catalog from "./pages/Catalog";
-import MyCatalog from "./pages/MyCatalog";
 import Create from "./pages/Create";
 import Profile from "./components/Profile/Profile";
 import {UserAuthContextProvider} from "./context/AuthContext";
 import Home from "./pages/Home";
 import CourseDetailsView from "./components/CourseDetailsView/CourseDetailsView";
 import Edit from "./components/Edit/Edit";
+import MyLikes from "./pages/MyLikes";
+import ErrorPage from "./pages/ErrorPage";
+
 const router = createBrowserRouter([
   {
     path: "/",
     element: <Root />,
+    errorElement: <ErrorPage />,
     children: [
+      {index: true, element: <Home />},
       {
         path: "/login",
         element: <LoginPage />,
@@ -32,10 +36,7 @@ const router = createBrowserRouter([
         path: "/catalog",
         element: <Catalog />,
       },
-      {
-        path: "/my-catalog",
-        element: <MyCatalog />,
-      },
+
       {
         path: "/create-class",
         element: <Create />,
@@ -49,9 +50,8 @@ const router = createBrowserRouter([
         element: <Edit />,
       },
       {path: "/profile", element: <Profile />},
+      {path: "/My-likes", element: <MyLikes />},
     ],
-
-    // errorElement: <ErrorPage />,
   },
 ]);
 

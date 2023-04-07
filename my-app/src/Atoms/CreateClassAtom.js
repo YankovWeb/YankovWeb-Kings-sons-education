@@ -36,6 +36,7 @@ const FormContainer = styled(Container)({
 //Start of the componnent
 
 const CreateClassAtom = ({formData, handleFormChange, handleSubmit}) => {
+  console.count("a");
   return (
     <FormContainer maxWidth="sm">
       <Typography variant="h4" align="center">
@@ -50,36 +51,56 @@ const CreateClassAtom = ({formData, handleFormChange, handleSubmit}) => {
           name="image"
           label="Image URL"
           type="url"
-          value={formData?.image || ""}
-          onChange={handleFormChange}
           margin="normal"
           variant="outlined"
           fullWidth
-          rows={2}
+          rows={4}
+          value={formData?.image || ""}
+          onChange={(e) => {
+            handleFormChange(e);
+          }}
+          helperText={
+            formData?.image?.length > 50
+              ? formData?.image.slice(0, 50) + "..."
+              : ""
+          }
         />
         <StyledTextField
           id="video"
           name="video"
-          label="YouTube-Link"
+          label="Video-Link"
           type="text"
-          value={formData?.video || ""}
-          onChange={handleFormChange}
           margin="normal"
           variant="outlined"
           fullWidth
           multiline
           rows={1}
+          value={formData?.video || ""}
+          onChange={(e) => {
+            handleFormChange(e);
+          }}
+          helperText={
+            formData?.video?.length > 50
+              ? formData?.video.slice(0, 50) + "..."
+              : ""
+          }
         />
         <StyledTextField
           id="heading"
           name="heading"
           label="Heading"
           type="text"
-          value={formData?.heading || ""}
-          onChange={handleFormChange}
           margin="normal"
           variant="outlined"
-          fullWidth
+          value={formData?.heading || ""}
+          onChange={(e) => {
+            handleFormChange(e);
+          }}
+          helperText={
+            formData?.heading?.length > 50
+              ? formData?.heading.slice(0, 50) + "..."
+              : ""
+          }
         />
 
         <StyledTextField
@@ -87,13 +108,19 @@ const CreateClassAtom = ({formData, handleFormChange, handleSubmit}) => {
           name="description"
           label="Description"
           type="text"
-          value={formData?.description || ""}
-          onChange={handleFormChange}
           margin="normal"
           variant="outlined"
-          fullWidth
           multiline
           rows={4}
+          value={formData?.description || ""}
+          onChange={(e) => {
+            handleFormChange(e);
+          }}
+          helperText={
+            formData?.description?.length > 50
+              ? formData?.description.slice(0, 50) + "..."
+              : ""
+          }
         />
 
         <Button

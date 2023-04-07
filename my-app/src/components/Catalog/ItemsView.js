@@ -1,59 +1,63 @@
-import CssBaseline from "@mui/material/CssBaseline";
-import Grid from "@mui/material/Grid";
-import {Box, Button} from "@mui/material";
-import Typography from "@mui/material/Typography";
-import Container from "@mui/material/Container";
-import Copyright from "../../Atoms/CoppyRigth";
-import CatalogButton from "../../Atoms/CatalogButton";
-import {useEffect} from "react";
+import {Container, Button, CssBaseline, Grid, Typography} from "@mui/material";
+import Copyright from "../../Atoms/Copyright";
+import {useEffect, useState} from "react";
 import useReadAll from "../../hooks/useReadAll";
 import {useUserAuth} from "../../context/AuthContext";
 import CustomCard from "../../UI/CustomCard";
 import CustomCardButtons from "../../UI/CustomCardButtons";
-import CatalogHeader from "../../Atoms/CatalogHeader";
 import useDeleteOne from "../../hooks/useDeleteOne";
 import Loader from "../../UI/Loader";
+import HeadingAndButtons from "../HeadingAndButtons/HeadingAndButtons";
+import useUpdate from "../../hooks/useUpdate";
+import {arrayUnion, arrayRemove} from "firebase/firestore";
+import LikeButton from "./LikeButton";
+
+const collectionName = "products";
+
 const ItemsView = () => {
-  const {allProducts, readAll, loading} = useReadAll();
   const {user} = useUserAuth();
+  const {allProducts, readAll, loading} = useReadAll();
   const {deleteOne, isDeleteClick} = useDeleteOne();
+  const {updateOne} = useUpdate(collectionName);
+  const [like, setLike] = useState(true);
+
+  const onClick = async (cardId, likes) => {
+    if (likes?.includes(user?.uid)) {
+      await updateOne(cardId, {
+        likes: arrayRemove(user.uid),
+      });
+      setLike(false);
+      return;
+    }
+    await updateOne(cardId, {likes: arrayUnion(user.uid)});
+    setLike(false);
+  };
 
   useEffect(() => {
-    const getAll = async () => {
-      await readAll();
-    };
-    getAll();
-  }, [readAll, isDeleteClick]);
-
-  console.log("HomeView");
-  //fix the inline css to a styled componnent.
-  //important!  bring the bissnes logic here.
-  //fix re rendering of avata becouse context calls
+    readAll();
+    setLike(true);
+  }, [readAll, isDeleteClick, like]);
 
   return (
     <div>
       <CssBaseline />
-
+      {loading && <Loader />}
+      <HeadingAndButtons user={user} />
       <main>
-        <Box
-          sx={{
-            bgcolor: "background.paper",
-            pt: 8,
-            pb: 6,
-          }}
-        >
-          <Container maxWidth="sm">
-            <CatalogHeader />
-            <CatalogButton user={user} />
-          </Container>
-        </Box>
         <Container sx={{py: 8}} maxWidth="lg">
-          {/* End hero unit */}
           <Grid container spacing={4}>
             {/*  Map Over All products and use Composition to give a prop and content*/}
-            {loading && <Loader />}
             {allProducts.map((card) => (
               <CustomCard key={card.id} card={card}>
+                <LikeButton
+                  user={user}
+                  card={card}
+                  onClick={onClick}
+                  like={like}
+                />
+                <Typography variant="h6">{` Likes :${
+                  card.likes?.length ? card.likes?.length : 0
+                }`}</Typography>
                 <CustomCardButtons card={card} user={user}>
                   <Button
                     color="error"
@@ -68,20 +72,8 @@ const ItemsView = () => {
             ))}
           </Grid>
         </Container>
-      </main>
-      {/* Footer */}
-      <Box sx={{bgcolor: "background.paper", p: 6}} component="footer">
-        <Typography
-          variant="subtitle1"
-          align="center"
-          color="text.secondary"
-          component="p"
-        >
-          Tank You
-        </Typography>
         <Copyright />
-      </Box>
-      {/* End footer */}
+      </main>
     </div>
   );
 };

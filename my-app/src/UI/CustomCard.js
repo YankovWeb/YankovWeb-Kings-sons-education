@@ -1,6 +1,5 @@
 import {
   Grid,
-  Box,
   Typography,
   Avatar,
   CardMedia,
@@ -8,6 +7,7 @@ import {
   CardContent,
   Card,
 } from "@mui/material";
+import Box from "@mui/joy/Box";
 
 const CustomCard = ({card, children}) => {
   return (

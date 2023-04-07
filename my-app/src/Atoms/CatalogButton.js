@@ -1,8 +1,7 @@
 import {Button, Stack} from "@mui/material";
 import {Link} from "react-router-dom";
 const CatalogButton = ({user}) => {
-  //if user is true
-  const buttonOneText = user ? "my-catalog" : "login";
+  const buttonOneText = user ? "profile" : "login";
   const buttonTwoText = user ? "create-class" : "register";
   return (
     <Stack sx={{pt: 4}} direction="row" spacing={2} justifyContent="center">

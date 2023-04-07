@@ -11,6 +11,7 @@ const useCreate = () => {
 
   const patern = /\.(jpg|jpeg|png|webp|avif|gif|svg)$/;
   const isImage = (url) => patern.test(url);
+
   const unfold = () => {
     setSuccess(false);
   };

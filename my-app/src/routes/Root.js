@@ -7,8 +7,9 @@ const Root = () => {
   return (
     <>
       <ResponsiveAppBar />
-
-      <Outlet />
+      <main>
+        <Outlet />
+      </main>
     </>
   );
 };

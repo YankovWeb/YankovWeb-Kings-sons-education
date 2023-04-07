@@ -11,7 +11,7 @@ import Typography from "@mui/material/Typography";
 import {useNavigate, NavLink} from "react-router-dom";
 import {useUserAuth} from "../../context/AuthContext";
 import useFormData from "../../hooks/useFormData";
-import Copyright from "../../Atoms/CoppyRigth";
+import Copyright from "../../Atoms/Copyright";
 import ImageGrid from "../../Atoms/ImageGrid";
 import Loader from "../../UI/Loader";
 //get from context useSignIn
@@ -20,10 +20,7 @@ import Loader from "../../UI/Loader";
 //use signIn from context
 
 const LoginView = () => {
-  const {formData, handleFormChange} = useFormData({
-    email: "",
-    password: "",
-  });
+  const {formData, handleFormChange} = useFormData();
 
   const {logInUser, loading} = useUserAuth();
   const navigate = useNavigate();
@@ -71,7 +68,7 @@ const LoginView = () => {
               autoComplete="email"
               autoFocus
               onChange={handleFormChange}
-              value={formData.email}
+              value={formData?.email || ""}
             />
             <TextField
               margin="normal"
@@ -83,7 +80,7 @@ const LoginView = () => {
               id="password"
               autoComplete="current-password"
               onChange={handleFormChange}
-              value={formData.password}
+              value={formData?.password || ""}
             />
 
             <Button

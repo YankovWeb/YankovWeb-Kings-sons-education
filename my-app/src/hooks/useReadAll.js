@@ -23,7 +23,6 @@ const useReadAll = () => {
 
   return {
     readAll,
-
     allProducts,
     loading,
     error,

@@ -19,9 +19,9 @@ import {useNavigate} from "react-router";
 import {NavLink} from "react-router-dom";
 
 const ResponsiveAppBar = () => {
-  const pages = ["home", "login", "register", "catalog"];
-  const pagesLogIn = ["home", "catalog", "my-catalog", "create-class"];
-  const settings = ["Profile", "Dashboard"];
+  const pages = ["home", "catalog", "login", "register"];
+  const pagesLogIn = ["home", "catalog", "create-class"];
+  const settings = ["Profile", "My-likes"];
 
   const [anchorElNav, setAnchorElNav] = useState(null);
   const [anchorElUser, setAnchorElUser] = useState(null);
@@ -52,11 +52,10 @@ const ResponsiveAppBar = () => {
   };
 
   return (
-    <AppBar position="static">
+    <AppBar position="sticky">
       <Container maxWidth="xl">
         <Toolbar disableGutters>
           <AdbIcon sx={{display: {xs: "none", md: "flex"}, mr: 1}} />
-
           <Box sx={{flexGrow: 1, display: {xs: "flex", md: "none"}}}>
             <IconButton
               size="large"
@@ -86,15 +85,15 @@ const ResponsiveAppBar = () => {
                 display: {xs: "block", md: "none"},
               }}
             >
-              {!user
-                ? pages.map((page) => (
+              {user
+                ? pagesLogIn.map((page) => (
                     <MenuItem key={page} onClick={handleCloseNavMenu}>
                       <NavLink to={`/${page}`} style={{textDecoration: "none"}}>
                         <Typography textAlign="center">{page}</Typography>
                       </NavLink>
                     </MenuItem>
                   ))
-                : pagesLogIn.map((page) => (
+                : pages.map((page) => (
                     <MenuItem key={page} onClick={handleCloseNavMenu}>
                       <NavLink to={`/${page}`} style={{textDecoration: "none"}}>
                         <Typography textAlign="center">{page}</Typography>
@@ -157,7 +156,6 @@ const ResponsiveAppBar = () => {
                   </NavLink>
                 ))}
           </Box>
-
           {user && (
             <Box sx={{flexGrow: 0}}>
               <Tooltip title="Open settings">
@@ -181,7 +179,6 @@ const ResponsiveAppBar = () => {
                 open={Boolean(anchorElUser)}
                 onClose={handleCloseUserMenu}
               >
-                {" "}
                 {settings.map((setting) => (
                   <MenuItem key={setting} onClick={handleCloseUserMenu}>
                     <NavLink

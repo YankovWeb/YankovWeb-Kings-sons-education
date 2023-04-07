@@ -11,6 +11,7 @@ const CreateClass = () => {
     () => ({
       ownerId: user?.uid,
       ownerName: user?.displayName,
+      video: "",
       image: "",
       heading: "",
       description: "",

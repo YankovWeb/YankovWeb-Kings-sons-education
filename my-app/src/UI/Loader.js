@@ -1,8 +1,7 @@
-import * as React from "react";
 import Stack from "@mui/material/Stack";
 import LinearProgress from "@mui/material/LinearProgress";
 
-export default function LinearColor() {
+const LinearColor = () => {
   return (
     <Stack sx={{width: "100%", color: "grey.500"}} spacing={8}>
       <LinearProgress color="secondary" />
@@ -19,4 +18,5 @@ export default function LinearColor() {
       <LinearProgress color="inherit" />
     </Stack>
   );
-}
+};
+export default LinearColor;

@@ -1,4 +1,3 @@
-import {memo} from "react";
 import {Typography} from "@mui/material";
 const CatalogHeader = () => {
   return (
@@ -10,15 +9,13 @@ const CatalogHeader = () => {
         color="text.primary"
         gutterBottom
       >
-        Album layout
+        Welcome
       </Typography>
       <Typography variant="h5" align="center" color="text.secondary" paragraph>
-        Something short and leading about the collection below—its contents, the
-        creator, etc. Make it short and sweet, but not too short so folks
-        don&apos;t simply skip over it entirely.
+        Happy browsing
       </Typography>
     </>
   );
 };
 
-export default memo(CatalogHeader);
+export default CatalogHeader;

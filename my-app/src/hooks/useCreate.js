@@ -35,7 +35,7 @@ const useCreate = () => {
       await toast.promise(createProdutItem(db, collectionName, newData), {
         pending: "Creating your Class",
         success: "Created! 👌",
-        error: "Someting got wron🤯",
+        error: "Someting got wrong🤯",
       });
       setSuccess(true);
       setLoading(false);

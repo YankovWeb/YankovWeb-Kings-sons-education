@@ -1,7 +1,5 @@
 import HomeComponent from "../components/HomePreview/HomeComponent";
 
-const Home = () => {
-  return <HomeComponent />;
-};
+const Home = () => <HomeComponent />;
 
 export default Home;

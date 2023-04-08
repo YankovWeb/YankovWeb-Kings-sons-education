@@ -1,13 +1,11 @@
 import {useCallback, useEffect, useState} from "react";
-
 import {db} from "../config/firebase";
 import {readOneProduct} from "../serivces/products/productService";
 
-const useReadOne = (id) => {
+const useReadOne = (id, collectionName) => {
   const [oneProduct, setOneProduct] = useState();
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState("");
-  const collectionName = "products";
 
   const readOne = useCallback(async () => {
     setLoading(true);
@@ -19,7 +17,7 @@ const useReadOne = (id) => {
       setError(error);
       setLoading(false);
     }
-  }, [id]);
+  }, [id, collectionName]);
 
   useEffect(() => {
     readOne();

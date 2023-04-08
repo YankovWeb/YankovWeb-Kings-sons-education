@@ -26,7 +26,7 @@ const ResponsiveAppBar = () => {
   const [anchorElNav, setAnchorElNav] = useState(null);
   const [anchorElUser, setAnchorElUser] = useState(null);
   const navigate = useNavigate();
-  const {user, logOutUser} = useUserAuth();
+  const {user, logOutUser, loading} = useUserAuth();
 
   const handleLogout = async () => {
     try {
@@ -85,7 +85,7 @@ const ResponsiveAppBar = () => {
                 display: {xs: "block", md: "none"},
               }}
             >
-              {user
+              {user && !loading
                 ? pagesLogIn.map((page) => (
                     <MenuItem key={page} onClick={handleCloseNavMenu}>
                       <NavLink to={`/${page}`} style={{textDecoration: "none"}}>
@@ -120,7 +120,7 @@ const ResponsiveAppBar = () => {
             }}
           ></Typography>
           <Box sx={{flexGrow: 1, display: {xs: "none", md: "flex"}}}>
-            {!user
+            {!user && loading
               ? pages.map((page) => (
                   <NavLink
                     key={page}

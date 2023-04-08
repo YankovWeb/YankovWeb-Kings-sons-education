@@ -1,0 +1,10 @@
+export {default as Catalog} from "./Catalog";
+export {default as Create} from "./Create";
+export {default as ErrorPage} from "./ErrorPage";
+export {default as Home} from "./Home";
+export {default as LoginPage} from "./LoginPage";
+export {default as MyLikes} from "./MyLikes";
+export {default as Register} from "./Register";
+export {default as CourseDetailsView} from "./CourseDetailsView";
+export {default as Edit} from "./Edit";
+export {default as Profile} from "./Profile";

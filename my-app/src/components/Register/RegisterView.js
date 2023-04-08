@@ -21,19 +21,18 @@ import useFormData from "../../hooks/useFormData";
 
 const RegisterView = () => {
   const {formData, handleFormChange} = useFormData(null);
-  const {signUpUser, loading} = useUserAuth();
+  const {user, signUpUser, loading} = useUserAuth();
   const navigate = useNavigate();
 
   const handleSubmit = async (e) => {
     e.preventDefault();
 
     const response = await signUpUser(formData);
-
-    if (response !== null) {
-      navigate("/Profile");
-    }
+    console.log(response);
   };
-
+  if (user) {
+    navigate("/home");
+  }
   return (
     <Container component="main" maxWidth="xs">
       <CssBaseline />

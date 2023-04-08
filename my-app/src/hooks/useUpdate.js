@@ -24,7 +24,6 @@ const useUpdate = (collectionName) => {
     } catch (error) {
       setErrorMessage(() => error.message);
       toast.error(errorMessage.message);
-
       setLoading(false);
     }
   };

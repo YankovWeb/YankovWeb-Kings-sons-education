@@ -1,8 +1,7 @@
 import useCreate from "../../hooks/useCreate";
 import {useUserAuth} from "../../context/AuthContext";
 import useFormData from "../../hooks/useFormData";
-import CreateClassAtom from "../../Atoms/CreateClassAtom";
-import Loader from "../../UI/Loader";
+import CreateClassAtom from "./CreateClassAtom";
 import {useEffect, useMemo} from "react";
 
 const CreateClass = () => {
@@ -19,7 +18,7 @@ const CreateClass = () => {
     [user]
   );
   const {formData, handleFormChange, resetForm} = useFormData(initialState);
-  const {createOne, loading, error, isSuccess, unfold} = useCreate();
+  const {createOne, error, isSuccess, unfold} = useCreate();
 
   const handleSubmit = (event) => {
     event.preventDefault();
@@ -31,19 +30,14 @@ const CreateClass = () => {
       unfold();
     }
   }, [isSuccess, resetForm, initialState, unfold]);
+
   return (
-    <>
-      {loading ? (
-        <Loader />
-      ) : (
-        <CreateClassAtom
-          formData={formData}
-          handleFormChange={handleFormChange}
-          handleSubmit={handleSubmit}
-          isError={error}
-        />
-      )}
-    </>
+    <CreateClassAtom
+      formData={formData}
+      handleFormChange={handleFormChange}
+      handleSubmit={handleSubmit}
+      isError={error}
+    />
   );
 };
 

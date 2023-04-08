@@ -44,9 +44,6 @@ export function UserAuthContextProvider({children}) {
           displayName: formData.displayName,
         });
       }
-
-      // Set the display name for the newly created user
-
       setError(false);
       setLoading(false);
       toast.success(`Welcome`);

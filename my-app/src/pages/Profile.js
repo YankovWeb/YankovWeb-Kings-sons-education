@@ -1,5 +1,5 @@
 import React from "react";
-import {useUserAuth} from "../../context/AuthContext";
+import {useUserAuth} from "../context/AuthContext";
 import {
   Avatar,
   Box,

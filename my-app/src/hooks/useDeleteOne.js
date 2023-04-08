@@ -2,6 +2,7 @@ import {useEffect, useState} from "react";
 import {db} from "../config/firebase";
 import {deleteColectionItem} from "../serivces/products/productService";
 import {toast} from "react-toastify";
+
 const useDeleteOne = () => {
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState("");

@@ -1,7 +1,7 @@
 import {useState, useCallback} from "react";
-
 import {db} from "../config/firebase";
 import {readAllProducts} from "../serivces/products/productService";
+
 const useReadAll = () => {
   const [allProducts, setAllProducts] = useState([]);
   const [loading, setLoading] = useState(false);

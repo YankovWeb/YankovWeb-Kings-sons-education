@@ -1,6 +1,5 @@
 import CreateClass from "../components/CreateClass/CreateClass";
-const Create = () => {
-  return <CreateClass />;
-};
+
+const Create = () => <CreateClass />;
 
 export default Create;

@@ -2,7 +2,7 @@
 Kings-sons-edication
 
 ## Demo link:
-Access my site at [google.com](https://google.com)
+Access my site at [King-Son's-Education](King-Son's-Education)
 
 ## Table of Content:
 

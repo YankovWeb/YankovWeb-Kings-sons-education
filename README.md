@@ -16,13 +16,15 @@ Access my site at [King-Son's-Education](King-Son's-Education)
 - [License](#license)
 
 ## About The App
-Platform for sharing free learning videos as courses 
+Platform for Creating and Sharing free learning videos as courses on all Topics.
+You can create , edit, read, delete records, save them true you likes, colect likes, and do live updates.
+You can register securly, SSH protocol.
 
 
 
 
 ## Technologies
-I used `React`, `React-router-don, MUI, JavaScript`, ...
+I used `React`, `React-router-dom, MUI, JavaScript, Firebase, Firestore, Fireauth`, ...
 
 ## Setup
 - download or clone the repository
@@ -33,13 +35,13 @@ I used `React`, `React-router-don, MUI, JavaScript`, ...
 
 
 ## Status
-[KSE] is still in progress. `Version 2` will be out soon.
+Deployed. `Version 2` will be out soon.
 
 ## Credits
 List of contriubutors:
 - Grigor Yankov
 
-
+## 
 ## License
 
-MIT license @ [author](author.com)
+MIT license @ [Grigor Yankov](author.com)

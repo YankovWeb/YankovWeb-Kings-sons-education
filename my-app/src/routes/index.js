@@ -9,6 +9,7 @@ import {
   Edit,
   Profile,
   MyLikes,
+  MyProducts,
 } from "../pages";
 import Root from "./Root";
 
@@ -55,6 +56,10 @@ export const routerArray = [
       {
         path: "/My-likes",
         element: <MyLikes />,
+      },
+      {
+        path: "/My-Products",
+        element: <MyProducts />,
       },
     ],
   },

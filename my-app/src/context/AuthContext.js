@@ -3,7 +3,7 @@ import {onIdTokenChanged, updateProfile} from "firebase/auth";
 import {auth} from "../config/firebase";
 import {logIn, signUp, logOut} from "../serivces/user/authService";
 import {toast} from "react-toastify";
-import Toast from "../UI/Toast";
+import Toast from "../components/Toast/Toast";
 import "react-toastify/dist/ReactToastify.css";
 
 const userAuthContext = createContext();
@@ -25,10 +25,10 @@ export function UserAuthContextProvider({children}) {
       setLoading(false);
     } catch (error) {
       setLoading(false);
-      setErrorMessage(error);
+      setErrorMessage(error.code.slice(5).replaceAll(" ", "-"));
       setError(true);
-      toast.error(`${error.code}`);
-      throw new Error(error);
+      toast.error(`${error.code.slice(5)}`);
+      throw new Error();
     }
   };
 
@@ -49,9 +49,10 @@ export function UserAuthContextProvider({children}) {
       toast.success(`Welcome`);
     } catch (error) {
       setLoading(false);
-      setErrorMessage(error);
+      setErrorMessage(error.code.slice(5).replaceAll("-", " "));
       setError(true);
-      toast.error(`${error.code}`);
+      toast.error(`${error.code.slice(5).replaceAll(" ", "-")}`);
+      throw new Error();
     }
   };
 
@@ -73,7 +74,6 @@ export function UserAuthContextProvider({children}) {
   };
   useEffect(() => {
     const unsubscribe = onIdTokenChanged(auth, (currentuser) => {
-      console.count("Auth", currentuser);
       setUser(currentuser);
     });
 

@@ -1,18 +1,26 @@
 import {useEffect, useState} from "react";
-import {Container, CssBaseline, Grid, Typography} from "@mui/material";
-import Copyright from "../../Atoms/Copyright";
+import {
+  Box,
+  Container,
+  CssBaseline,
+  Grid,
+  Stack,
+  Typography,
+} from "@mui/material";
+import {arrayUnion, arrayRemove} from "firebase/firestore";
+
+import useDeleteOne from "../../hooks/useDeleteOne";
 import useReadAll from "../../hooks/useReadAll";
 import {useUserAuth} from "../../context/AuthContext";
-import CustomCard from "../../UI/CustomCard";
-import CustomCardButtons from "../../UI/CustomCardButtons";
-import useDeleteOne from "../../hooks/useDeleteOne";
-
-import HeadingAndButtons from "../HeadingAndButtons/HeadingAndButtons";
 import useUpdate from "../../hooks/useUpdate";
-import {arrayUnion, arrayRemove} from "firebase/firestore";
+
+import CustomCard from "../Card/CustomCard";
+import CustomCardButtons from "../Card/CustomCardButtons";
+import ScrollToTop from "../ScrollToTop/ScrollToTop";
+import HeadingAndButtons from "../HeadingAndButtons/HeadingAndButtons";
 import LikeButton from "./LikeButton";
 
-//colection name
+//collection name
 const collectionName = "products";
 
 const ItemsView = () => {
@@ -43,6 +51,7 @@ const ItemsView = () => {
     <>
       <CssBaseline />
       <HeadingAndButtons user={user} />
+
       <main>
         <Container sx={{py: 8}} maxWidth="lg">
           <Grid container spacing={4}>
@@ -55,9 +64,16 @@ const ItemsView = () => {
                   onClick={onClick}
                   like={like}
                 />
-                <Typography variant="h6">{` Likes :${
-                  card.likes?.length ? card.likes?.length : 0
-                }`}</Typography>
+                <Stack direction="row" alignItems="center" spacing={1}>
+                  <Typography variant="h6">
+                    {card.likes?.length ? card.likes?.length : 0}
+                  </Typography>
+                  <Box sx={{fontSize: 16, color: "text.secondary"}}>
+                    <Typography variant="subtitle2">
+                      {card.likes?.length === 1 ? "Like" : "Likes"}
+                    </Typography>
+                  </Box>
+                </Stack>
                 <CustomCardButtons
                   card={card}
                   user={user}
@@ -67,7 +83,7 @@ const ItemsView = () => {
             ))}
           </Grid>
         </Container>
-        <Copyright />
+        <ScrollToTop />
       </main>
     </>
   );

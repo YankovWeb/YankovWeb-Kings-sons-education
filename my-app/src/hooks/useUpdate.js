@@ -6,7 +6,6 @@ import {updateCollectionItem} from "../serivces/products/productService";
 const useUpdate = (collectionName) => {
   const [isSuccess, setSuccess] = useState(false);
   const [loading, setLoading] = useState(false);
-  const [errorMessage, setErrorMessage] = useState("");
 
   const updateOne = async (id, updatedData) => {
     setLoading(true);
@@ -22,8 +21,7 @@ const useUpdate = (collectionName) => {
       setSuccess(true);
       setLoading(false);
     } catch (error) {
-      setErrorMessage(() => error.message);
-      toast.error(errorMessage.message);
+      toast.error(error?.code);
       setLoading(false);
     }
   };

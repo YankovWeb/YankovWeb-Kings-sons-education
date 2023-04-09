@@ -1,7 +1,7 @@
 import {Typography, Grid, Paper} from "@mui/material";
 import {Video} from "../Video/Video";
 
-const CourseDetail = ({course, isAuth}) => (
+const CourseDetail = ({course, isAuth, isLoading, dataIsLoading}) => (
   <Paper sx={{margin: 6, border: 1}}>
     <Typography variant="h4" gutterBottom sx={{padding: 2}}>
       {course?.heading || ""}
@@ -14,12 +14,12 @@ const CourseDetail = ({course, isAuth}) => (
         <Typography variant="subtitle1" gutterBottom>
           Creator: {course?.ownerName || ""}
         </Typography>
-        {isAuth ? (
-          <Video url={course?.video || ""} />
-        ) : (
+        {!isAuth && !isLoading && !dataIsLoading ? (
           <h2 style={{backgroundColor: "red"}}>
             "TO SEE THE COURSE PLACE LOGIN"
           </h2>
+        ) : (
+          <Video url={course?.video || ""} />
         )}
       </Grid>
       <Grid item xs={12} sm={6}>

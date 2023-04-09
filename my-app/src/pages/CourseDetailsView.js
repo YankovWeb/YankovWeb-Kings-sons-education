@@ -9,11 +9,18 @@ const collectionName = "products";
 
 const CourseDetailsView = () => {
   const {id} = useParams();
-  const {oneProduct} = useReadOne(id, collectionName);
-  const {user} = useUserAuth();
+  const {oneProduct, loading: dataIsLoading} = useReadOne(id, collectionName);
+  const {user, loading} = useUserAuth();
   const isAuth = !!user;
 
-  return <CourseDetail course={oneProduct} isAuth={isAuth} />;
+  return (
+    <CourseDetail
+      course={oneProduct}
+      isAuth={isAuth}
+      isLoading={loading}
+      dataIsLoading={dataIsLoading}
+    />
+  );
 };
 
 export default CourseDetailsView;

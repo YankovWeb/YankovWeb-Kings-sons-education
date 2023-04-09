@@ -18,7 +18,7 @@ const CreateClass = () => {
     [user]
   );
   const {formData, handleFormChange, resetForm} = useFormData(initialState);
-  const {createOne, error, isSuccess, unfold} = useCreate();
+  const {createOne, error, isSuccess, unfold, errorMessage} = useCreate();
 
   const handleSubmit = (event) => {
     event.preventDefault();
@@ -30,13 +30,14 @@ const CreateClass = () => {
       unfold();
     }
   }, [isSuccess, resetForm, initialState, unfold]);
-
+  console.log({errorMessage});
   return (
     <CreateClassAtom
       formData={formData}
       handleFormChange={handleFormChange}
       handleSubmit={handleSubmit}
       isError={error}
+      errorMessage={errorMessage}
     />
   );
 };

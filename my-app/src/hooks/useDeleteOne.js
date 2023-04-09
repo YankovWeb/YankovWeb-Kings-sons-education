@@ -13,7 +13,11 @@ const useDeleteOne = () => {
     setLoading(true);
 
     try {
-      if (window.confirm("Are you sure you want to proceed?")) {
+      if (
+        window.confirm(
+          "Are you sure you want to DELETE? This action is PERMANENT and cannot be UNDONE."
+        )
+      ) {
         await toast.promise(deleteColectionItem(db, collectionName, id), {
           pending: "Deleting...",
           success: "Class is Deleted! 👌",

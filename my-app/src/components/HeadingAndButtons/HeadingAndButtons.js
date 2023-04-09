@@ -1,6 +1,6 @@
 import React from "react";
-import CatalogButton from "../../Atoms/CatalogButton";
-import CatalogHeader from "../../Atoms/CatalogHeader";
+import CatalogButton from "./CatalogButton";
+import CatalogHeader from "./CatalogHeader";
 import {Box, Container} from "@mui/material";
 const HeadingAndButtons = ({user}) => {
   return (

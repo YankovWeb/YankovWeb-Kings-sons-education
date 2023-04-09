@@ -1,8 +1,9 @@
-import CustomCard from "../UI/CustomCard";
+import CustomCard from "../components/Card/CustomCard";
 import {Button, Grid, CssBaseline, Container} from "@mui/material";
 import {Link} from "react-router-dom";
 
 import useGetLike from "../hooks/useGetLike";
+import ScrollToTop from "../components/ScrollToTop/ScrollToTop";
 
 const MyLikes = () => {
   const {likedProducts} = useGetLike();
@@ -24,7 +25,8 @@ const MyLikes = () => {
               </Button>
             </CustomCard>
           ))}
-        </Grid>
+        </Grid>{" "}
+        <ScrollToTop />
       </Container>
     </>
   );

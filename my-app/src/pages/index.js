@@ -8,3 +8,4 @@ export {default as Register} from "./Register";
 export {default as CourseDetailsView} from "./CourseDetailsView";
 export {default as Edit} from "./Edit";
 export {default as Profile} from "./Profile";
+export {default as MyProducts} from "./MyProducts";

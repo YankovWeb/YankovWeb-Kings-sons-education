@@ -1,19 +1,22 @@
 import {useState} from "react";
-import classes from "./ResponsiveAppBar.module.css";
-import AppBar from "@mui/material/AppBar";
-import Box from "@mui/material/Box";
-import Toolbar from "@mui/material/Toolbar";
-import IconButton from "@mui/material/IconButton";
-import Typography from "@mui/material/Typography";
-import Menu from "@mui/material/Menu";
-import MenuIcon from "@mui/icons-material/Menu";
-import Container from "@mui/material/Container";
-import Avatar from "@mui/material/Avatar";
-import Button from "@mui/material/Button";
-import Tooltip from "@mui/material/Tooltip";
-import MenuItem from "@mui/material/MenuItem";
-import AdbIcon from "@mui/icons-material/Adb";
 
+import {
+  AppBar,
+  Box,
+  Toolbar,
+  IconButton,
+  Typography,
+  Menu,
+  Container,
+  Avatar,
+  Button,
+  Tooltip,
+  MenuItem,
+} from "@mui/material";
+
+import AdbIcon from "@mui/icons-material/Adb";
+import MenuIcon from "@mui/icons-material/Menu";
+import classes from "./ResponsiveAppBar.module.css";
 import {useUserAuth} from "../../context/AuthContext";
 import {useNavigate} from "react-router";
 import {NavLink} from "react-router-dom";
@@ -21,7 +24,7 @@ import {NavLink} from "react-router-dom";
 const ResponsiveAppBar = () => {
   const pages = ["home", "catalog", "login", "register"];
   const pagesLogIn = ["home", "catalog", "create-class"];
-  const settings = ["Profile", "My-likes"];
+  const settings = ["Profile", "My-likes", "My-Products"];
 
   const [anchorElNav, setAnchorElNav] = useState(null);
   const [anchorElUser, setAnchorElUser] = useState(null);
@@ -50,7 +53,7 @@ const ResponsiveAppBar = () => {
   const handleCloseUserMenu = () => {
     setAnchorElUser(null);
   };
-
+  console.log();
   return (
     <AppBar position="sticky">
       <Container maxWidth="xl">
@@ -120,7 +123,7 @@ const ResponsiveAppBar = () => {
             }}
           ></Typography>
           <Box sx={{flexGrow: 1, display: {xs: "none", md: "flex"}}}>
-            {!user && loading
+            {!user && !loading
               ? pages.map((page) => (
                   <NavLink
                     key={page}

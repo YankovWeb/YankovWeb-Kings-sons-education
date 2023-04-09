@@ -1,7 +1,12 @@
 import {Button, Typography} from "@mui/material";
 import * as S from "./Styles";
 
-const CreateClassAtom = ({formData, handleFormChange, handleSubmit}) => (
+const CreateClassAtom = ({
+  formData,
+  handleFormChange,
+  handleSubmit,
+  errorMessage,
+}) => (
   <S.FormContainer maxWidth="sm">
     <Typography variant="h4" align="center">
       Add a new Class
@@ -17,17 +22,15 @@ const CreateClassAtom = ({formData, handleFormChange, handleSubmit}) => (
         type="url"
         margin="normal"
         variant="outlined"
-        fullWidth
-        rows={4}
+        multiline
+        fullWidth={true}
+        rows={3}
         value={formData?.image || ""}
         onChange={(e) => {
           handleFormChange(e);
         }}
-        helperText={
-          formData?.image?.length > 50
-            ? formData?.image.slice(0, 50) + "..."
-            : ""
-        }
+        error={errorMessage?.includes("Url")}
+        helperText={errorMessage?.includes("Url") && errorMessage}
       />
       <S.StyledTextField
         id="video"
@@ -38,16 +41,13 @@ const CreateClassAtom = ({formData, handleFormChange, handleSubmit}) => (
         variant="outlined"
         fullWidth
         multiline
-        rows={1}
+        rows={3}
         value={formData?.video || ""}
         onChange={(e) => {
           handleFormChange(e);
         }}
-        helperText={
-          formData?.video?.length > 50
-            ? formData?.video.slice(0, 50) + "..."
-            : ""
-        }
+        error={errorMessage?.includes("video")}
+        helperText={errorMessage?.includes("video") && errorMessage}
       />
       <S.StyledTextField
         id="heading"
@@ -56,18 +56,17 @@ const CreateClassAtom = ({formData, handleFormChange, handleSubmit}) => (
         type="text"
         margin="normal"
         variant="outlined"
+        rows={6}
         value={formData?.heading || ""}
         onChange={(e) => {
           handleFormChange(e);
         }}
-        helperText={
-          formData?.heading?.length > 50
-            ? formData?.heading.slice(0, 50) + "..."
-            : ""
-        }
+        error={errorMessage?.includes("Heading")}
+        helperText={errorMessage?.includes("Heading") && errorMessage}
       />
 
       <S.StyledTextField
+        required
         id="description"
         name="description"
         label="Description"
@@ -75,16 +74,13 @@ const CreateClassAtom = ({formData, handleFormChange, handleSubmit}) => (
         margin="normal"
         variant="outlined"
         multiline
-        rows={4}
+        rows={6}
         value={formData?.description || ""}
         onChange={(e) => {
           handleFormChange(e);
         }}
-        helperText={
-          formData?.description?.length > 50
-            ? formData?.description.slice(0, 50) + "..."
-            : ""
-        }
+        error={errorMessage?.includes("Description")}
+        helperText={errorMessage?.includes("Description") && errorMessage}
       />
 
       <Button

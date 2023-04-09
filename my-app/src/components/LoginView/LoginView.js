@@ -11,9 +11,10 @@ import Typography from "@mui/material/Typography";
 import {useNavigate, NavLink} from "react-router-dom";
 import {useUserAuth} from "../../context/AuthContext";
 import useFormData from "../../hooks/useFormData";
-import Copyright from "../../Atoms/Copyright";
-import ImageGrid from "../../Atoms/ImageGrid";
-import Loader from "../../UI/Loader";
+import Copyright from "../Copyrigth/Copyright";
+import ImageGrid from "./ImageGrid";
+import {useEffect} from "react";
+
 //get from context useSignIn
 //get from context Auth
 //if auth not render the this
@@ -21,8 +22,7 @@ import Loader from "../../UI/Loader";
 
 const LoginView = () => {
   const {formData, handleFormChange} = useFormData();
-
-  const {logInUser, loading} = useUserAuth();
+  const {logInUser, errorMessage} = useUserAuth();
   const navigate = useNavigate();
 
   const onSubmit = async (e) => {
@@ -33,10 +33,8 @@ const LoginView = () => {
       navigate("/Profile");
     }
   };
-  if (loading) {
-    return <Loader />;
-  }
 
+  useEffect(() => {}, [errorMessage]);
   return (
     <Grid container component="main" sx={{height: "93.6vh"}}>
       <CssBaseline />
@@ -57,8 +55,16 @@ const LoginView = () => {
           <Typography component="h1" variant="h5">
             Sign in
           </Typography>
-          <Box component="form" noValidate onSubmit={onSubmit} sx={{mt: 1}}>
+          <Box component="form" onSubmit={onSubmit} sx={{mt: 1}}>
             <TextField
+              error={
+                errorMessage.includes("email") || errorMessage.includes("user")
+              }
+              helperText={
+                errorMessage.includes("email") || errorMessage.includes("user")
+                  ? errorMessage
+                  : ""
+              }
               margin="normal"
               required
               fullWidth
@@ -71,6 +77,8 @@ const LoginView = () => {
               value={formData?.email || ""}
             />
             <TextField
+              error={errorMessage.includes("password")}
+              helperText={errorMessage.includes("password") && errorMessage}
               margin="normal"
               required
               fullWidth

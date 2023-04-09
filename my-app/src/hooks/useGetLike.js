@@ -19,8 +19,6 @@ const useGetLike = () => {
             where("likes", "array-contains", user?.uid)
           );
           const snapshot = await toast.promise(getDocs(likedProductsQuery), {
-            pending: "Loading...",
-
             error: "Someting got wron🤯",
           });
           const likedProductsData = snapshot.docs.map((doc) => ({
@@ -31,7 +29,7 @@ const useGetLike = () => {
         }
         setLoading(false);
       } catch (error) {
-        toast(error.massage);
+        toast(error.message);
         setLoading(false);
       }
     };

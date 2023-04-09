@@ -1,11 +1,11 @@
 import {useEffect} from "react";
-import {Grid, Container} from "@mui/material";
+import {Grid, Container, Typography} from "@mui/material";
 import useReadAll from "../../hooks/useReadAll";
-import {ButtonBases} from "../../Atoms/ButtonBases";
-import Loader from "../../UI/Loader";
+import {ButtonBases} from "./ButtonBases";
+import ScrollToTop from "../ScrollToTop/ScrollToTop";
 
 const HomeComponent = () => {
-  const {allProducts, readAll, loading} = useReadAll();
+  const {allProducts, readAll} = useReadAll();
 
   // Set the `isSubtitleVisible` state to true after a delay
   useEffect(() => {
@@ -17,14 +17,14 @@ const HomeComponent = () => {
 
   return (
     <>
-      {loading && <Loader />}
-      <h1 style={{textAlign: "center"}}>
+      <Typography variant="h3" sx={{textAlign: "center", py: 8}}>
         Find or Create your Free Study Material and courses
-      </h1>{" "}
+      </Typography>{" "}
       <Container sx={{py: 8}} maxWidth="lg">
         <Grid container spacing={4}>
           <ButtonBases allProducts={allProducts} />
         </Grid>
+        <ScrollToTop />
       </Container>
     </>
   );

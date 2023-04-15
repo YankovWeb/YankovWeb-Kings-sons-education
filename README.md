@@ -1,8 +1,7 @@
 # Project Title
 Kings-sons-edication
 
-## Demo link:
-Access my site at [King-Son's-Education](King-Son's-Education)
+## Demo link: https://kse-app-64529.web.app/
 
 ## Table of Content:
 
@@ -24,7 +23,7 @@ You can register securly, SSH protocol.
 
 
 ## Technologies
-I used `React`, `React-router-dom, MUI, JavaScript, Firebase, Firestore, Fireauth`, ...
+I used `React`, `React-router-dom, MUI, JavaScript, Firebase, Firestore, Fireauth, Toastify`, ...
 
 ## Setup
 - download or clone the repository
